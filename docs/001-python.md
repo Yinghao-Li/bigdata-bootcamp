@@ -317,7 +317,7 @@ print(a[b])
 
 ### 4.3. Array math
 
-Basic mathematical functions operate element-wise on arrays, and are available both as operator overloads and as functions in the `numpy` module:
+Basic mathematical functions operate **element-wise** on arrays, and are available both as operator overloads and as functions in the `numpy` module:
 ```python
 x = np.arange(1, 5, dtype=float).reshape(2, 2)
 y = np.arange(5, 9, dtype=float).reshape(2, 2)
@@ -375,9 +375,8 @@ print(np.dot(x, y))
 print(x @ y)
 ```
 
-{{ hint_warning }}
-**Attention:** `np.dot()` and `@` behaves differently when the matrix rank is larger than 2.
-{{ _hint }}
+!!! warning
+    **Attention:** `np.dot()` and `@` behaves differently when the matrix rank is larger than 2.
 
 `Numpy` also provides functions for performing computations within an array:
 ```python
@@ -486,7 +485,11 @@ import joblib
 
 ### 6.2. Load data
 
-You can download the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv) by clicking the link or using `wget`: `wget https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv` and move the file to your current folder.
+You can download the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv) by clicking the link or using `wget`:
+```bash
+wget https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+```
+and move the file to your current folder.
 Then, load the `csv` data into memory through `pandas`:
 
 ```python
