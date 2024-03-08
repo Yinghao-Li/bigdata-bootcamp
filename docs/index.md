@@ -1,17 +1,15 @@
-# Welcome to MkDocs
+# Welcome to Georgia Tech Big Data Analytics Bootcamp
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This tutorial is modified from [Dr. Chao Zhang's course website](http://chaozhang.org/bigdata-bootcamp/) with some updates.
 
-## Commands
+## Topics
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+* [Introduction to Python](./001-python.md)
+* Environment Setup for Big Data Analytics
+    - [Docker Setup](./002-docker.md)
+    - [Zeppelin Setup](./003-zeppelin.md)
+* Basic Introduction to Programming Language for Data Analytics
+    - [Scala Basics](./004-scala.md)
+    - [Spark Basics](./005-spark.md)
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+For more content including Spark SQL and Spark Machine Learning Library, please refer to [the course website](http://chaozhang.org/bigdata-bootcamp/).
