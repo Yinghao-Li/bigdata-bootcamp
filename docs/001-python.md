@@ -95,10 +95,8 @@ We use **Python >= 3.9** in this tutorial.
 First, in your terminal, type `python` or `ipython` or `jupyter notebook` to start an interactive python shell.
 `ipython` or `jupyter notebook` is recommended.
 
-!!! info
-    The tutorial is also on Google Colab: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1J2rCfbQm5heCt5LN1t8RZHA1O9VaT8b-?usp=sharing)
 
-### 3.1. Variable definition, input and output (print)
+### 3.1. Variable definition, input and output (```print```)
 
 We do not need to specify the variable type while defining a variable.
 The interpreter will automatically infer the data type from the assigned value.
