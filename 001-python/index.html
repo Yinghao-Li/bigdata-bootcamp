@@ -233,11 +233,7 @@ Please refer to the <a href="https://docs.python.org/dev/whatsnew/index.html">of
 </div>
 <p>First, in your terminal, type <code>python</code> or <code>ipython</code> or <code>jupyter notebook</code> to start an interactive python shell.
 <code>ipython</code> or <code>jupyter notebook</code> is recommended.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>The tutorial is also on Google Colab: <a href="https://colab.research.google.com/drive/1J2rCfbQm5heCt5LN1t8RZHA1O9VaT8b-?usp=sharing"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
-</div>
-<h3 id="31-variable-definition-input-and-output-print">3.1. Variable definition, input and output (print)</h3>
+<h3 id="31-variable-definition-input-and-output-print">3.1. Variable definition, input and output (<code>print</code>)</h3>
 <p>We do not need to specify the variable type while defining a variable.
 The interpreter will automatically infer the data type from the assigned value.</p>
 <pre><code class="language-python">a = 123
@@ -405,7 +401,7 @@ print(b)
 print(a[b])
 </code></pre>
 <h3 id="43-array-math">4.3. Array math</h3>
-<p>Basic mathematical functions operate element-wise on arrays, and are available both as operator overloads and as functions in the <code>numpy</code> module:</p>
+<p>Basic mathematical functions operate <strong>element-wise</strong> on arrays, and are available both as operator overloads and as functions in the <code>numpy</code> module:</p>
 <pre><code class="language-python">x = np.arange(1, 5, dtype=float).reshape(2, 2)
 y = np.arange(5, 9, dtype=float).reshape(2, 2)
 print(x)
@@ -459,9 +455,10 @@ print(x.dot(y))
 print(np.dot(x, y))
 print(x @ y)
 </code></pre>
-<p>{{ hint_warning }}
-<strong>Attention:</strong> <code>np.dot()</code> and <code>@</code> behaves differently when the matrix rank is larger than 2.
-{{ _hint }}</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Attention:</strong> <code>np.dot()</code> and <code>@</code> behaves differently when the matrix rank is larger than 2.</p>
+</div>
 <p><code>Numpy</code> also provides functions for performing computations within an array:</p>
 <pre><code class="language-python">print(np.sum(x))  # Compute sum of all elements; prints &quot;10&quot;
 print(x.sum())  # same as above
@@ -548,7 +545,10 @@ from sklearn.metrics import mean_squared_error, r2_score
 import joblib
 </code></pre>
 <h3 id="62-load-data">6.2. Load data</h3>
-<p>You can download the <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">data</a> by clicking the link or using <code>wget</code>: <code>wget https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</code> and move the file to your current folder.
+<p>You can download the <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">data</a> by clicking the link or using <code>wget</code>:</p>
+<pre><code class="language-bash">wget https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+</code></pre>
+<p>and move the file to your current folder.
 Then, load the <code>csv</code> data into memory through <code>pandas</code>:</p>
 <pre><code class="language-python">data = pd.read_csv('winequality-red.csv', sep=';')
 </code></pre>
