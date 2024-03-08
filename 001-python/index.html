@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Python for Data Analysis - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Python for Data Analysis";
+        var mkdocs_page_input_path = "001-python.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Python for Data Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-python-installation-anaconda">1. Python Installation: Anaconda</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11-windows-and-macos">1.1. Windows and macOS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-linux-with-terminal">1.2. Linux with terminal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-verify-your-installation">1.3. Verify your installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14-conda-environment">1.4. Conda environment</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-package-installation">2. Package Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-basic-python-concepts">3. Basic Python Concepts</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-variable-definition-input-and-output-print">3.1. Variable definition, input and output (print)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-list-tuple-set-and-dictionary">3.2. List, tuple, set and dictionary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33-if-else">3.3. If else</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34-loops">3.4. Loops</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#35-function">3.5 Function</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-basic-numpy-usage">4. Basic Numpy Usage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41-array-creation">4.1. Array creation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42-array-indexing">4.2. Array indexing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43-array-math">4.3. Array math</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-using-matplotlib-for-visualization">5. Using Matplotlib for Visualization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-pandas-and-scikit-learn-for-data-science">6. Pandas and Scikit-Learn for Data Science</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61-import-packages">6.1. Import packages</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62-load-data">6.2. Load data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63-take-a-look-of-the-loaded-data">6.3. Take a look of the loaded data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64-split-data">6.4. Split data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65-pre-processing">6.5. Pre-processing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#66-fit-the-model">6.6. Fit the model</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#67-define-the-cross-validation-pipeline">6.7. Define the cross-validation pipeline</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#68-save-and-load-models">6.8. Save and load models</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-zeppelin/">Zeppelin</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../004-scala/">Scala Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../005-spark/">Spark Basics</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Python Introduction</li>
+      <li class="breadcrumb-item active">Python for Data Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="python-tools-for-data-analysis">Python Tools for Data Analysis</h1>
+<p><em>lecturer: <a href="https://yinghao-li.github.io/">Yinghao Li</a></em></p>
+<h2 id="1-python-installation-anaconda">1. Python Installation: Anaconda</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>If you don't feel like using the local environment</strong>, you can try <a href="https://colab.research.google.com/">Google Colab</a> for a <em>free</em> online python environment.
+The examples are also available on Colab:<br />
+<a href="https://colab.research.google.com/drive/1J2rCfbQm5heCt5LN1t8RZHA1O9VaT8b-?usp=sharing"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+</div>
+<p><strong>Ignore this session if you already have a python environment.</strong></p>
+<p><a href="https://www.anaconda.com/">Anaconda</a> is a complete, <a href="https://docs.anaconda.com/anaconda/eula">open source</a> data science package with a community of over 6 million users.
+It is easy to <a href="https://www.anaconda.com/download/">download</a> and install;
+and it supports Linux, macOS, and Windows (<a href="https://opensource.com/article/18/4/getting-started-anaconda-python">source</a>).</p>
+<p>In this tutorial, we'll use <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> for minimal installation.
+Please refer to <a href="https://conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda">this page</a> for the difference between Anaconda and Miniconda and which one to choose.</p>
+<h3 id="11-windows-and-macos">1.1. Windows and macOS</h3>
+<ol>
+<li>Download the latest Miniconda installer from the <a href="https://docs.conda.io/en/latest/miniconda.html#windows-installers">official website</a>.</li>
+<li>Install the package according to the instructions.</li>
+<li>Start to use <em>conda</em> environment with <em>Anaconda Prompt</em> or other shells if you enabled this feature during installation.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Notice: To use <code>conda</code> command in other shells/prompts, you need to add the conda directory to your <code>PATH</code> environment variable.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="https://docs.anaconda.com/anaconda/install/windows/">this page</a> for more information about Anaconda installation on Windows and <a href="https://docs.anaconda.com/anaconda/install/mac-os/">this page</a> on MacOS.</p>
+</div>
+<h3 id="12-linux-with-terminal">1.2. Linux with terminal</h3>
+<ol>
+<li>Start the terminal.</li>
+<li>Switch to <code>~/Download/</code> with command <code>cd ~/Download/</code>. If the path does not exist, create one using <code>mkdir ~/Download/</code>.</li>
+<li>Download the latest Linux Miniconda distribution using <code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</code>.</li>
+<li>Once the download is complete, install Miniconda using <code>bash Miniconda3-latest-Linux-x86_64.sh</code>.</li>
+<li>Follow the prompts on the installer screens.
+   If you are unsure about any setting, accept the defaults. You can change them later.</li>
+<li>To make the changes take effect, close and then re-open your terminal window or use the command <code>source ~/.bashrc</code>.</li>
+<li>If you are using <em>zsh</em> or other shells, make sure conda is initiated. To do this, switch back to bash and type the command <code>conda init &lt;shell name&gt;</code>.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="https://docs.anaconda.com/anaconda/install/linux/">this page</a> for more information about Anaconda installation on Linux.</p>
+</div>
+<h3 id="13-verify-your-installation">1.3. Verify your installation</h3>
+<p>You can use the command <code>conda list</code> to check your conda installation.
+If the terminal returns a bunch of python packages, then your installation is successful.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="https://docs.anaconda.com/anaconda/install/verify-install/">this page</a> for more information.</p>
+</div>
+<h3 id="14-conda-environment">1.4. Conda environment</h3>
+<p>With conda, you can easily create, remove, and update environments, each with an independent version of Python interpreter and Python packages.
+This is always desirable when you work on different Python projects with different (often conflicting) package dependencies.
+In this tutorial, we will use the default <em>base</em> environment.
+For more information on environment management, please refer to <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda: managing environments</a>.</p>
+<h2 id="2-package-installation">2. Package Installation</h2>
+<p>If you are using Anaconda or Miniconda, you can use the Anaconda package manager <code>conda</code>.
+You can also use other managers such as <code>pip</code> when the packages are not provided by any conda channels.</p>
+<p>To look for a specific package, you can visit <a href="https://anaconda.org/">this website</a> and type the name of that package in the search box.
+For today's instruction, we need to install <code>numpy</code>, <code>matplotlib</code>,  <code>scikit-learn</code> and <code>pandas</code>. </p>
+<p>First, switch to your conda environment using <code>conda activate &lt;env name&gt;</code> (not necessary if you are using the default <em>base</em> environment), then install those packages using the following commands:</p>
+<pre><code class="language-bash">conda install -c conda-forge numpy matplotlib scikit-learn pandas
+</code></pre>
+<p>The package manager will automatically install the dependencies.
+If you install <code>scikit-learn</code> first, which depends on <code>numpy</code>, you don't have to install <code>numpy</code> manually and the conda package solver will do it for you.</p>
+<p>If you prefer a fancier and more powerful python shell, you can choose to install <code>ipython</code> and <code>jupyter notebook</code>.</p>
+<pre><code class="language-bash">conda install -c conda-forge ipython
+conda install jupyter
+</code></pre>
+<p><a href="https://jupyter.org/try">Jupyter notebook</a> allows you to run your commands using the browser as an interface instead of the terminal.</p>
+<h2 id="3-basic-python-concepts">3. Basic Python Concepts</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A more comprehensive tutorial can be found on the <a href="http://cs231n.github.io/python-numpy-tutorial/#python-basic">Stanford CS231n website</a>.</p>
+</div>
+<p>We use <strong>Python &gt;= 3.9</strong> in this tutorial.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Notice that previous Python interpreter versions may behave differently.
+Please refer to the <a href="https://docs.python.org/dev/whatsnew/index.html">official document</a> for more details.</p>
+</div>
+<p>First, in your terminal, type <code>python</code> or <code>ipython</code> or <code>jupyter notebook</code> to start an interactive python shell.
+<code>ipython</code> or <code>jupyter notebook</code> is recommended.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The tutorial is also on Google Colab: <a href="https://colab.research.google.com/drive/1J2rCfbQm5heCt5LN1t8RZHA1O9VaT8b-?usp=sharing"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+</div>
+<h3 id="31-variable-definition-input-and-output-print">3.1. Variable definition, input and output (print)</h3>
+<p>We do not need to specify the variable type while defining a variable.
+The interpreter will automatically infer the data type from the assigned value.</p>
+<pre><code class="language-python">a = 123
+b = '123'
+c = &quot;1234&quot;
+print(a, b, c, type(a), type(b), type(c))
+</code></pre>
+<p>A variable can be overwritten by a different type:</p>
+<pre><code class="language-python">a = 123.456
+print(type(a))
+a = '123'
+print(type(a))
+</code></pre>
+<p>The <code>input</code> method allows you to interactively input information into the program through CLI:</p>
+<pre><code class="language-python">x = input('Input something: ')
+print(x, type(x))
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>Input</code> is rarely used unless you are developing CLI programs.
+A more practical input method is <a href="https://docs.python.org/3/library/argparse.html">argparse</a>.</p>
+</div>
+<h3 id="32-list-tuple-set-and-dictionary">3.2. List, tuple, set and dictionary</h3>
+<ul>
+<li><strong>List</strong> is a collection that is <em>ordered</em> and <em>changeable</em>.
+It allows duplicate members.</li>
+<li><strong>Tuple</strong> is a collection that is <em>ordered</em> but <em>not changeable</em>.
+It also allows duplicate members.</li>
+<li><strong>Set</strong> is a collection that is <em>unordered</em> and <em>unindexed</em>.
+It does not allow duplicate members.
+Elements in a set cannot be retrieved by index.</li>
+<li><strong>Dictionary</strong> is a collection that is <em>ordered</em>, <em>changeable</em> and <em>indexed</em>.
+It does not allow duplicate members.  </li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Notice that Dictionary used to be unordered before <em>Python 3.7</em>.</p>
+</div>
+<pre><code class="language-python">_list = [1, 2, 1.2, '1', '2', 1]  # this is a list
+_tuple = (1, 2, 1.2, '1', '2', 1)  # this is a tuple
+_set = {1, 2, 1.2, '1', '2', 1}  # this is a set
+_dict = {  # this is a dict
+    1: '111',
+    2: '222',
+    '1': 567,
+    2.2: ['J', 'Q', 'K']
+}
+print(_list, '\n', _tuple, '\n', _set, '\n', _dict)
+</code></pre>
+<p>Access elements</p>
+<pre><code class="language-python">print(_list[0], _list[-2], _list[1: 3])
+print(_tuple[1], _tuple[-2])
+print(_set[0], _set[-1])
+print(_dict[1], _dict['1'], _dict[2.2])
+</code></pre>
+<p>Shallow copy</p>
+<pre><code class="language-python">a = _list
+a[0] = 888
+print(a, '\n', _list)
+</code></pre>
+<h3 id="33-if-else">3.3. If else</h3>
+<pre><code class="language-python">if 888 not in _dict.keys():
+    _dict[888] = '???'
+elif 999 not in _dict.keys():
+    _dict[999] = '!@#$%'
+else:
+    _dict['qwert'] = 'poiuy'
+</code></pre>
+<h3 id="34-loops">3.4. Loops</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Note:</strong> in Python, the indent is used to define a scope instead of curly brackets <code>{}</code>.
+Usually, people use 4 whitespaces or one tab character <code>\t</code> as one layer of indent.
+Be sure to make it consistent throughout the file.</p>
+</div>
+<ul>
+<li><code>for</code> loop:</li>
+</ul>
+<pre><code class="language-python">for x in _list:
+    print(x)
+
+for i in range(len(_list)):
+    print(_list[i])
+</code></pre>
+<ul>
+<li><code>while</code> loop:</li>
+</ul>
+<pre><code class="language-python">i = 0
+while i != len(_list):
+    print(_list[i])
+    i += 1
+</code></pre>
+<h3 id="35-function">3.5 Function</h3>
+<p>Define a function:</p>
+<pre><code class="language-python">def my_func(x):
+    x += 1
+    print('in function: ', x)
+    return x
+</code></pre>
+<p>Call a function</p>
+<pre><code class="language-python">t = 10
+tt = my_func(t)
+print(f'out of funciton, t: {t}, tt: {tt}')
+</code></pre>
+<h2 id="4-basic-numpy-usage">4. Basic Numpy Usage</h2>
+<h3 id="41-array-creation">4.1. Array creation</h3>
+<p>A <code>numpy</code> array is a grid of values, all of the same type, and is indexed by a tuple of integers.
+The number of dimensions is the <em>rank</em> of the array; the <em>shape</em> of an array is a tuple of integers giving the size of the array along each dimension.</p>
+<p>We can initialize <code>numpy</code> arrays from nested Python lists, and access elements using square brackets:</p>
+<pre><code class="language-python">import numpy as np
+
+a = np.array([1, 2, 3])   # Create a rank 1 array
+print(type(a), a.dtype)
+print(a.shape)
+print(a[1])
+
+b = np.array([[1,2,3],[4,5,6]])    # Create a rank 2 array
+print(b.shape)
+print(b[0, 0], b[0, 1], b[1, 0])
+</code></pre>
+<p>Change the type of an array:</p>
+<pre><code class="language-python">print(a.dtype)
+a = a.astype(float)
+print(a.dtype)
+</code></pre>
+<p>Other array creation methods:</p>
+<pre><code class="language-python">a = np.zeros((2,2))   # Create an array of all zeros
+print(a)
+b = np.ones((1,2))    # Create an array of all ones
+print(b)
+c = np.full((2,2), 7, dtype=np.float32)  # Create a constant array
+print(c)
+d = np.eye(3)         # Create a 3x3 identity matrix
+print(d)
+e = np.random.random((3,3))  # Create an array filled with random values
+print(e)
+</code></pre>
+<h3 id="42-array-indexing">4.2. Array indexing</h3>
+<p>Similar to Python lists, <code>numpy</code> arrays can be sliced.</p>
+<pre><code class="language-python"># Create a rank 1 array and reshape it to a 3x4 matrix
+a = np.arange(12).reshape(3, 4)
+b = a[:2, 1:3]
+print(a)
+print(b)
+
+# Shallow copy
+b[0, 0] = 888
+print(a)
+</code></pre>
+<p>You can mix integer indexing with slice indexing.
+However, integer indexing will yield an array of lower rank than the original array:</p>
+<pre><code class="language-python">row_r1 = a[1, :]    # Rank 1 view of the second row of a
+row_r2 = a[1:2, :]  # Rank 2 view of the second row of a
+print(row_r1, row_r1.shape)
+print(row_r2, row_r2.shape)
+</code></pre>
+<p>You can also access array elements through lists:</p>
+<pre><code class="language-python">x = [0, 1, 2]
+y = [3, 1, 0]
+print(a[x, y])
+</code></pre>
+<p>Or through a boolean array:</p>
+<pre><code class="language-python">b = a &gt; 4
+print(b)
+print(a[b])
+</code></pre>
+<h3 id="43-array-math">4.3. Array math</h3>
+<p>Basic mathematical functions operate element-wise on arrays, and are available both as operator overloads and as functions in the <code>numpy</code> module:</p>
+<pre><code class="language-python">x = np.arange(1, 5, dtype=float).reshape(2, 2)
+y = np.arange(5, 9, dtype=float).reshape(2, 2)
+print(x)
+print(y)
+
+# Elementwise sum
+print(x + y)
+print(np.add(x, y))
+
+# Elementwise difference
+print(x - y)
+print(np.subtract(x, y))
+
+# Elementwise product
+print(x * y)
+print(np.multiply(x, y))
+
+# Elementwise division
+print(x / y)
+print(np.divide(x, y))
+
+# Elementwise square
+print(x ** 2)
+print(np.power(x, 2))
+
+# Elementwise square root
+print(x ** 0.5)
+print(np.sqrt(x))
+</code></pre>
+<p>Matrix multiplication is realized by <code>np.dot</code> or operator <code>@</code>:</p>
+<pre><code class="language-python">x = np.arange(1, 5, dtype=float).reshape(2, 2)
+y = np.arange(5, 9, dtype=float).reshape(2, 2)
+print(x)
+print(y)
+
+v = np.array([9, 10], dtype=float)
+w = np.array([11, 12], dtype=float)
+
+# Inner product
+print(v.dot(w))
+print(np.dot(v, w))
+print(v @ w)
+
+# Matrix / vector product
+print(x.dot(v))
+print(np.dot(x, v))
+print(x @ v)
+
+# Matrix / matrix product
+print(x.dot(y))
+print(np.dot(x, y))
+print(x @ y)
+</code></pre>
+<p>{{ hint_warning }}
+<strong>Attention:</strong> <code>np.dot()</code> and <code>@</code> behaves differently when the matrix rank is larger than 2.
+{{ _hint }}</p>
+<p><code>Numpy</code> also provides functions for performing computations within an array:</p>
+<pre><code class="language-python">print(np.sum(x))  # Compute sum of all elements; prints &quot;10&quot;
+print(x.sum())  # same as above
+print(np.sum(x, axis=0))  # Compute sum of each column; prints &quot;[4 6]&quot;
+print(np.sum(x, axis=1))  # Compute sum of each row; prints &quot;[3 7]&quot;
+</code></pre>
+<p>To transpose a matrix, use the <code>T</code> attribute of an array object:</p>
+<pre><code class="language-python">print(x.T)
+</code></pre>
+<p>If you have a rank &gt;2 matrix, you can use <code>np.transpose</code> to specify how to permute the axes:</p>
+<pre><code class="language-python">x = np.arange(24).reshape(2, 3, 4)
+print(x.transpose(1, 0, 2).shape)
+</code></pre>
+<h2 id="5-using-matplotlib-for-visualization">5. Using Matplotlib for Visualization</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+# %matplotlib qt
+
+# Compute the x and y coordinates for points on a sine curve
+x = np.arange(0, 3 * np.pi, 0.1)
+y = np.sin(x)
+
+# Plot the points using matplotlib
+plt.plot(x, y)
+plt.show()  # You must call plt.show() to make graphics appear.
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note: for jupyter notebook, you can use the command <code>%matplotlib inline</code> to make the graphics embedded in the editor or <code>%matplotlib qt</code> to make them pop out.</p>
+</div>
+<p>To plot multiple lines at once, and add a title, legend, and axis labels:</p>
+<pre><code class="language-python">x = np.arange(0, 3 * np.pi, 0.1)
+y_sin = np.sin(x)
+y_cos = np.cos(x)
+
+# Plot the points using matplotlib
+plt.plot(x, y_sin)
+plt.plot(x, y_cos)
+plt.xlabel('x axis label')
+plt.ylabel('y axis label')
+plt.title('Sine and Cosine')
+plt.legend(['Sine', 'Cosine'])
+plt.show()
+</code></pre>
+<p>You can plot different things in the same figure using the <code>subplot</code> function. Here is an example:</p>
+<pre><code class="language-python"># Set up a subplot grid that has height 2 and width 1,
+# and set the first such subplot as active.
+plt.subplot(2, 1, 1)
+
+# Make the first plot
+plt.plot(x, y_sin)
+plt.title('Sine')
+
+# Set the second subplot as active, and make the second plot.
+plt.subplot(2, 1, 2)
+plt.plot(x, y_cos)
+plt.title('Cosine')
+
+# Show the figure.
+plt.show()
+</code></pre>
+<h2 id="6-pandas-and-scikit-learn-for-data-science">6. Pandas and Scikit-Learn for Data Science</h2>
+<p>In this section, we will look at a data science example using pandas as data management tool and scikit-learn (sklearn) as algorithm implementation.
+This section is modified from <a href="https://elitedatascience.com/python-machine-learning-tutorial-scikit-learn">this tutorial</a>.</p>
+<h3 id="61-import-packages">6.1. Import packages</h3>
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+
+# automatically split the data into training and test set
+from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
+
+# classifiers and regressors
+from sklearn.ensemble import RandomForestRegressor
+# Construct a Pipeline from the given estimators
+from sklearn.pipeline import make_pipeline
+# Exhaustive search over specified parameter values for an estimator.
+from sklearn.model_selection import GridSearchCV
+
+# Training objective and evaluation metrics
+from sklearn.metrics import mean_squared_error, r2_score
+# For model persistence
+# you can use `from sklearn.externals import joblib` if your sklearn version is earlier than 0.23
+import joblib
+</code></pre>
+<h3 id="62-load-data">6.2. Load data</h3>
+<p>You can download the <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">data</a> by clicking the link or using <code>wget</code>: <code>wget https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</code> and move the file to your current folder.
+Then, load the <code>csv</code> data into memory through <code>pandas</code>:</p>
+<pre><code class="language-python">data = pd.read_csv('winequality-red.csv', sep=';')
+</code></pre>
+<p>Or, you can directly load the data through URL.</p>
+<pre><code class="language-python">dataset_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+data = pd.read_csv(dataset_url, sep=';')
+</code></pre>
+<p>You can also load datasets stored in other formats with <code>pandas</code>.
+A detailed document is at <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">pandas: io</a>.</p>
+<h3 id="63-take-a-look-of-the-loaded-data">6.3. Take a look of the loaded data</h3>
+<p>The data loaded is stored in the type of <code>pandas.core.frame.DataFrame</code></p>
+<p>To give a peak of the data, we can use</p>
+<pre><code class="language-python">print(data)
+</code></pre>
+<p>This will return a nice-looking preview of the elements in the DataFrame.</p>
+<p>To view the name of the features of a DataFrame, one can use</p>
+<pre><code class="language-python">print(data.keys())
+</code></pre>
+<p>To access one column, i.e., all instances of a feature, e.g., <code>pH</code>, one can use</p>
+<pre><code class="language-python"># These will return the same result
+print(data['pH'])
+print(data.pH)
+</code></pre>
+<p>To access a row, you need the <code>DataFrame.iloc</code> attribute:</p>
+<pre><code class="language-python">print(data.iloc[10])
+</code></pre>
+<p>We can also easily print some summary statistics:</p>
+<pre><code class="language-python">print(data.describe())
+</code></pre>
+<h3 id="64-split-data">6.4. Split data</h3>
+<p>First, let's separate our target (y) feature from our input (X) features and divide the dataset into training and test sets using the <code>train_test_split</code> function:</p>
+<pre><code class="language-python">y = data.quality
+X = data.drop('quality', axis=1)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=0, stratify=y
+)
+</code></pre>
+<p>Stratifying your sample by the target variable will ensure your training set looks similar to your test set, making your evaluation metrics more reliable.</p>
+<h3 id="65-pre-processing">6.5. Pre-processing</h3>
+<p>Standardization is the process of subtracting the means from each feature and then dividing by the feature standard deviations. It is a common requirement for machine learning tasks. Many algorithms assume that all features are centered around zero and have approximately the same variance.</p>
+<pre><code class="language-python">scaler = preprocessing.StandardScaler().fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# To prove the trainig and testing sets have (nearly) zero mean and one deviation
+print(X_train_scaled.mean(axis=0))
+print(X_train_scaled.std(axis=0))
+print(X_test_scaled.mean(axis=0))
+print(X_test_scaled.std(axis=0))
+</code></pre>
+<h3 id="66-fit-the-model">6.6. Fit the model</h3>
+<p>If we do not need to fine-tune the hyperparameters, we can define a random forest regression model with the default hyperparameters and fit the model using</p>
+<pre><code class="language-python">regr = RandomForestRegressor()
+regr.fit(X_train_scaled, y_train)
+</code></pre>
+<p>To examine the performance, we use the test set to calculate the scores</p>
+<pre><code class="language-python">pred = regr.predict(X_test_scaled)
+
+print(r2_score(y_test, pred))
+print(mean_squared_error(y_test, pred))
+</code></pre>
+<h3 id="67-define-the-cross-validation-pipeline">6.7. Define the cross-validation pipeline</h3>
+<p>Fine-tuning hyperparameters is an important job in Machine Learning since a set of carefully chosen hyperparameters may greatly improve the performance of the model.</p>
+<p>In practice, when we set up the cross-validation pipeline, we won't even need to manually fit the data. Instead, we'll simply declare the class object, like so:</p>
+<pre><code class="language-python">pipeline = make_pipeline(
+    preprocessing.StandardScaler(),
+    RandomForestRegressor(n_estimators=100)
+)
+</code></pre>
+<p>To check the hyperparameters, we may use</p>
+<pre><code class="language-python">print pipeline.get_params()
+</code></pre>
+<p>or refer to the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">official document</a>.</p>
+<p>Now, let's declare the hyperparameters we want to tune through cross-validation.</p>
+<pre><code class="language-python">hyperparameters = {
+    'randomforestregressor__max_features' : ['auto', 'sqrt', 'log2'],
+    'randomforestregressor__max_depth': [None, 5, 3, 1]
+}
+</code></pre>
+<p>Then, we can set a 10-fold cross validation as simple as</p>
+<pre><code class="language-python">clf = GridSearchCV(pipeline, hyperparameters, cv=10)
+</code></pre>
+<p>Finally, we can automatically fine-tune the model using</p>
+<pre><code class="language-python">clf.fit(X_train, y_train)
+</code></pre>
+<p>After the model fitting, if we want to check the best hyperparameters, we can use</p>
+<pre><code class="language-python">print(clf.best_params_)
+</code></pre>
+<p>Same as before, we evaluate the fitted model on test set</p>
+<pre><code class="language-python">pred = clf.predict(X_test)
+
+print(r2_score(y_test, pred))
+print(mean_squared_error(y_test, pred))
+</code></pre>
+<h3 id="68-save-and-load-models">6.8. Save and load models</h3>
+<p>After training, we may want to save the trained model for future use. For this purpose, we can use</p>
+<pre><code class="language-python">joblib.dump(clf, 'rf_regressor.pkl')
+</code></pre>
+<p>When you want to load the model again, simply use this function:</p>
+<pre><code class="language-python">clf2 = joblib.load('rf_regressor.pkl')
+
+# Predict data set using loaded model
+clf2.predict(X_test)
+</code></pre>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A more comprehensive example of scikit-learn can be found <a href="https://scikit-learn.org/stable/tutorial/statistical_inference/index.html">here</a>.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../002-docker/" class="btn btn-neutral float-right" title="Docker">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../002-docker/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

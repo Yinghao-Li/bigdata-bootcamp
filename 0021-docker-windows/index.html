@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>0021 docker windows - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "0021 docker windows";
+        var mkdocs_page_input_path = "0021-docker-windows.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-python/">Python for Data Analysis</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-zeppelin/">Zeppelin</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../004-scala/">Scala Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../005-spark/">Spark Basics</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">0021 docker windows</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="1-windows-docker-desktop-recommended">1. Windows Docker Desktop (recommended)</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before installation, please check <a href="https://docs.docker.com/desktop/windows/install/#system-requirements">this page</a> for system requirements.
+If your system does not fulfill the prerequisite, you may see the image as follow. Please use <em><a href="#2-docker-toolbox-on-windows">Docker Toolbox on Windows</a></em> instead.</p>
+<p><img alt="" src="../img/env_images/docker-for-windows-10-prerequisite-not-fullfilled.png" /></p>
+</div>
+<p>Download the image from <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">this link</a> and follow the installer step by step.</p>
+<p>Once you have successfully installed docker desktop, you may click the button "Docker Desktop".
+It may take a few minutes to start the service.
+You may keep a watch on the whale on the right button.</p>
+<p>Double click the whale button, and we can find a window to modify some of the properties.</p>
+<p><img alt="" src="../img/env_images/docker-desktop-general.png" /></p>
+<p>Please go to the advanced tab and click the drivers <strong>you wish to share with the docker container</strong>.
+Note: if your homework is located on Disk-D, you may not select Disk-C, this could make your operation system safer.</p>
+<p><img alt="" src="../img/env_images/docker-desktop-shared-drives.png" /></p>
+<p>Go to the advanced tab, and you can edit the maximum memory used by docker.</p>
+<p><img alt="" src="../img/env_images/docker-desktop-resources.png" /></p>
+<p>If you can execute the command <code>docker ps -a</code> and <code>docker-compose</code> without any error message returned, your configuration is successful.</p>
+<h2 id="2-docker-toolbox-on-windows">2. Docker Toolbox on Windows</h2>
+<p>You may install <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">Docker Toolbox on Windows</a> instead.</p>
+<p>Going to the instruction page, click "<a href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>", you will download an installer.
+You are supposed to install Docker and VirtualBox during this wizard.</p>
+<p><img alt="" src="../img/env_images/terminal-and-virtualbox.png" /></p>
+<p>Click "Docker Quickstart Terminal", you should be able to start a bash session.
+Close it, click virtual box.
+You may find there is one virtual machine is running.
+Close this machine, update the maximum base memory.</p>
+<p><img alt="" src="../img/env_images/poweroff-vm.png" /></p>
+<p><img alt="" src="../img/env_images/set-max-ram.png" /></p>
+<p>Click the "Docker Quickstart Terminal" and your docker is ready.</p>
+<h3 id="faq">FAQ</h3>
+<p><strong>Q:  VirtualBox will not boot a 64bits VM when Hyper-V is activated</strong></p>
+<p>You may meet message as follow:</p>
+<blockquote>
+<p>Error with pre-create check: "This computer is running Hyper-V. VirtualBox won't boot a 64bits VM when Hyper-V is activated.
+Either use Hyper-V as a driver, or disable the Hyper-V hypervisor. (To skip this check, use --virtualbox-no-vtx-check)</p>
+</blockquote>
+<p>You can not run VirtualBox on a system with Hyper-V enabled.
+Hyper-V is a tier-1 hypervisor, which does not accept other hypervisors (from <a href="https://forums.docker.com/t/unable-to-run-the-docker-toolbox/37403/3">here</a>)</p>
+<ol>
+<li>It seems like Docker for Windows has already resolved this issue</li>
+<li>Try to <a href="https://superuser.com/questions/540055/convenient-way-to-enable-disable-hyper-v-in-windows-8">disable Hyper-V</a>. <strong>Caution:</strong> According to some reports, this operation may damage his/her network and had to reinstall all network adapters to get Internet back, or even getting a blue screen error.</li>
+<li>Try to use Hyper-V as your backend driver. <a href="https://docs.docker.com/machine/drivers/hyper-v/">https://docs.docker.com/machine/drivers/hyper-v/</a></li>
+</ol>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

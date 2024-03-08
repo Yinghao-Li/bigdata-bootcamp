@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>0023 docker macos - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "0023 docker macos";
+        var mkdocs_page_input_path = "0023-docker-macos.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-python/">Python for Data Analysis</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-zeppelin/">Zeppelin</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../004-scala/">Scala Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../005-spark/">Spark Basics</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">0023 docker macos</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>Currently, there are at least two approaches to running Docker services on macOS.</p>
+<h2 id="1-option-one-dockerapp">1. Option One:  Docker.app</h2>
+<p><strong>We recommend this installation approach.</strong></p>
+<p>You can visit the <a href="https://docs.docker.com/docker-for-mac/install/">official website</a> to download Docker Desktop and installation instructions.
+Select and download a proper version of docker image and drag it to your "Applications" folder to install Docker software.
+After installation, you can click the Docker icon in the toolbar and set the maximum memory to 4G-8G, as recommended.</p>
+<p><img alt="" src="../img/env_images/docker-app-toolbar-preferences.png" /></p>
+<p><img alt="" src="../img/env_images/docker-app-toolbar-preferences-advanced.png" /></p>
+<p><code>Docker.app</code> requires <code>sudo</code> access, and the container data are stored at <code>$HOME/Library/Containers/com.docker.docker</code>.</p>
+<h2 id="2-option-two-homebrew-virtualbox-docker">2. Option Two: Homebrew + VirtualBox + Docker</h2>
+<p>However, here is an alternative solution.</p>
+<p>First of all, you should make sure you have already installed <a href="http://brew.sh/">HomeBrew</a>.
+Secondly, you are supposed to make sure your brew is up-to-date.</p>
+<pre><code class="language-bash">brew update  # update brew repository
+brew upgrade  # update all packages for brew
+brew doctor  # check your brew status
+</code></pre>
+<p>Finally, you can install VirtualBox and Docker by using the following commands:</p>
+<pre><code class="language-bash">brew install Caskroom/cask/virtualbox
+brew install docker-machine
+brew install docker
+</code></pre>
+<p>To keep the Docker service active, we can use brew's service manager</p>
+<pre><code>$ brew services start docker-machine
+==&gt; Successfully started `docker-machine` (label: homebrew.mxcl.docker-machine)
+</code></pre>
+<p>Check the status:</p>
+<pre><code>$ brew services list
+Name           Status  User Plist
+docker-machine started name   /Users/name/Library/LaunchAgents/homebrew.mxcl.docker-machine.plist
+</code></pre>
+<p>Create a default instance using the following command:</p>
+<pre><code class="language-bash">docker-machine create --driver virtualbox --virtualbox-memory 8192  default
+</code></pre>
+<p>Please refer to <a href="https://docs.docker.com/machine/reference/create/">this link</a> for detailed instructions.</p>
+<p>Each time you create a new terminal window, you need to execute the following command before you use any docker commands <code>docker *</code>:</p>
+<pre><code class="language-bash">eval $(docker-machine env default)
+</code></pre>
+<p>This command appends some environment variables to your current sessions.</p>
+<h3 id="faq">FAQ</h3>
+<p><strong>Q: Can not connect to Docker</strong> </p>
+<p>Error Message:</p>
+<pre><code>$ docker ps -a
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+</code></pre>
+<p>Please make sure you have already started your session.</p>
+<p><strong>Q: Start docker-machine Failed, Can Not Get IP Address</strong> </p>
+<p>The default manager conflicts with vpn <a href="https://faq.oit.gatech.edu/content/how-do-i-get-started-campus-vpn">AnyConnect</a>.
+Please disconnect your AnyConnect VPN before starting the Docker server.
+Whether Docker is compatible with GlobalProtect VPN has not been tested yet.</p>
+<p><strong>Q: Invalid Active Developer Path</strong> </p>
+<pre><code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+Error: Failure while executing: git config --local --replace-all homebrew.analyticsmessage true
+</code></pre>
+<p>try <code>xcode-select --install</code> and then <code>brew update</code>, <code>brew upgrade</code>, and <code>brew doctor</code> again</p>
+<p><strong>Q: Where are the data for the images and hard disks?</strong> </p>
+<p>They are in <code>$HOME/.docker</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

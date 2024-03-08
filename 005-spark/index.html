@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Spark Basics - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Spark Basics";
+        var mkdocs_page_input_path = "005-spark.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-python/">Python for Data Analysis</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-zeppelin/">Zeppelin</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../004-scala/">Scala Basics</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Spark Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-spark-shell">1. Spark Shell</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-rdd">2. RDD</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-parallelized-collections">2.1. Parallelized Collections</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-external-datasets">2.2. External Datasets</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-rdd-operations">3. RDD Operations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-count">function count</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-take">function take</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-map">function map</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-filter">function filter</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-distinct">function distinct</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-group">function group</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-reducebykey">function reduceByKey</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-sortby">function sortBy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#statistics">Statistics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-operations">Set Operations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#datasets">Datasets</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-further-reading">4. Further Reading</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Scala and Spark</li>
+      <li class="breadcrumb-item active">Spark Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="spark-basics">Spark Basics</h1>
+<h2 id="1-spark-shell">1. Spark Shell</h2>
+<p>Spark can run in several modes, including YARN client/server, Standalone, Mesos and Local.
+For this training, we will use local mode.
+Specifically, you can start the Spark interactive shell by invoking the command below in the terminal to run Spark in the local mode with two threads.
+Then you will see</p>
+<pre><code>&gt; spark-shell --master &quot;local[2]&quot; --driver-memory 6G
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+...
+[messages]
+...
+Spark context available as sc.
+scala&gt;
+</code></pre>
+<p>Here you can set <code>--driver-memory</code> according to your local setting.
+If your setting of driver memory is larger than the VM memory, don't forget to change the VM memory setting first.</p>
+<p>In Spark, we call the main entrance of a Spark program the <strong>driver</strong> and Spark distribute computation the <strong>workers</strong>.
+Here in the interactive shell, the Spark shell program is the driver.
+In the above example, we set the memory of the driver program to 3GB as in the local mode driver and worker are together.
+A driver program can access Spark through a <code>SparkContext</code> object, which represents a connection to a computing cluster.
+In the interactive shell, <code>SparkContext</code> is already created for you as variable <code>sc</code>.
+You can input <code>sc</code> to see its type.</p>
+<pre><code class="language-scala">scala&gt; sc
+res0: org.apache.spark.SparkContext = org.apache.spark.SparkContext@27896d3b
+</code></pre>
+<h2 id="2-rdd">2. RDD</h2>
+<p>Resilient Distributed Dataset (RDD) is Spark's core abstraction for working with data.
+An RDD is simply a fault-tolerant <strong>distributed</strong> collection of elements.
+You can imagine RDD as a large array whose elements cannot be accessed randomly.
+However, you can apply the same operations to all elements in the array easily.
+In Spark, all the work is expressed as either creating new RDDs, transforming existing RDDs, or calling operations on RDDs to compute results.
+There are two ways to create RDDs: by distributing a collection of objects (e.g., a list or set), or by referencing a dataset in an external storage system, such as a shared filesystem, HDFS, HBase, or any data source offering a Hadoop InputFormat.</p>
+<h3 id="21-parallelized-collections">2.1. Parallelized Collections</h3>
+<p>For the demo purpose, the simplest way to create an RDD is to take an existing collection (e.g. a Scala Array) in your program and pass it to SparkContext's <code>parallelize()</code> method.</p>
+<pre><code class="language-scala">scala&gt; val data = Array(1, 2, 3, 4, 5)
+data: Array[Int] = Array(1, 2, 3, 4, 5)
+
+scala&gt; val distData = sc.parallelize(data)
+distData: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[0] at parallelize at &lt;console&gt;:23
+</code></pre>
+<p>Once created, the distributed dataset (<code>distData</code>) can be operated in parallel.
+For example, we can add up the elements by calling <code>distData.reduce((a, b) =&gt; a + b)</code>.
+You will see more operations on RDD later on.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Parallelizing a collection is useful when you are learning Spark.
+However, this is not encouraged in production since it requires the entire dataset to be in memory of the driver's machine first.
+Instead, importing data from <em>external datasets</em> should be employed.</p>
+</div>
+<h3 id="22-external-datasets">2.2. External Datasets</h3>
+<p>A common way for creating RDDs is loading data from external storage.
+Below you will learn how to load data from a file system. </p>
+<p>Here, we choose to read data from HDFS, which stands for Hadoop Distributed File System.
+(For more details, you could refer to <a href="http://www.sunlab.org/teaching/cse6250/spring2020/hadoop/hdfs-basic.html#hdfs-operations">HDFS Basics.</a>)</p>
+<p>When you use HDFS for the first time, it's likely that your home directory in HDFS has not been created yet.
+In the environment that we provide, there's a special user <code>hdfs</code> who is an HDFS administrator and has the permission to create new home directories.</p>
+<p>We need to put the data case.csv into HDFS, and to do this, run the following commands:</p>
+<pre><code class="language-bash">&gt; cd /bigdata-bootcamp/data
+&gt; sudo su - hdfs
+&gt; hdfs dfs -mkdir -p /input
+&gt; hdfs dfs -chown -R root /input
+&gt; exit 
+&gt; hdfs dfs -put case.csv /input
+</code></pre>
+<p>What you do above is that first, you switch to the <code>hdfs</code> user.
+Then, you create a directory and change ownership of the newly created folder.
+(Since it is a virtual environment, you don't need to worry about using root user and its permission.)
+Next, similar to creating local directory via linux command <code>mkdir</code>, you creating a folder named <code>input</code> in HDFS. 
+In <code>hdfs dfs -mkdir</code>, <code>hdfs</code> is the HDFS utility program, <code>dfs</code> is the subcommand to handle basic HDFS operations, 
+<code>-mkdir</code> means you want to create a directory and the directory name is specified as <code>input</code>. 
+These commands actually create the input directory in your home directory in HDFS.
+Of course, you can create it to other place with absolute or relative paths.
+Finally, after exiting HDFS, you copy data from local file system to HDFS using <code>-put</code>.</p>
+<pre><code class="language-scala">scala&gt; val lines = sc.textFile(&quot;/input/case.csv&quot;)
+lines: org.apache.spark.rdd.RDD[String] = README.md MapPartitionsRDD[1] at textFile at &lt;console&gt;:21
+</code></pre>
+<p>Here in the example, each line of the original file will become an element in the <code>lines</code> RDD.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Reading data from a file system, Spark relies on the HDFS library.
+In the example we assume HDFS is well configured through environmental variables or configuration files so that data is ready in HDFS.</p>
+</div>
+<h2 id="3-rdd-operations">3. RDD Operations</h2>
+<p>RDDs offer two types of operations: <strong>transformations</strong> and <strong>actions</strong>:</p>
+<ul>
+<li><strong>Transformations</strong> are operations on RDDs that return a new RDD, such as <code>map()</code> and <code>filter()</code>.</li>
+<li><strong>Actions</strong> are operations that return a result to the driver program or write it to storage, such as <code>first()</code> and <code>count()</code>.</li>
+</ul>
+<p>Spark treats <strong>transformations</strong> and <strong>actions</strong> very differently, so understanding which type of operation you are performing is very important.
+You can check whether a function is a transformation or an action by looking at its return type: <strong>transformations</strong> return RDDs, whereas <strong>actions</strong> return some other data types.</p>
+<p>All <strong>transformations</strong> in Spark are lazy, in that they do not compute the results right away.
+Instead, they just remember the operations applied to some base dataset (e.g. an Array or a file).
+The <strong>transformations</strong> are only computed when an action requires a result to be returned to the driver program.
+Therefore, the above command of reading in a file has not actually been executed yet.
+We can force the evaluation of RDDs by calling any <strong>actions</strong>.</p>
+<p>Let's go through some common RDD operations using the healthcare dataset.
+Recall that in the file <strong>case.csv</strong>, each line is a 4-field tuple <code>(patient-id, event-id, timestamp, value)</code>.</p>
+<h3 id="function-count"><kbd>function</kbd> <code>count</code></h3>
+<p>In order to know how large is our raw event sequence data, we can count the number of lines in the input file using <code>count</code> operation, i.e.</p>
+<pre><code class="language-scala">scala&gt; lines.count()
+res1: Long = 14046
+</code></pre>
+<p>Clearly, <code>count</code> is an <strong>action</strong>.</p>
+<h3 id="function-take"><kbd>function</kbd> <code>take</code></h3>
+<p>You may wonder what the loaded data looks like, you can take a peek at the data. The <code>take(k)</code> will return the first k elements in the RDD. Spark also provides <code>collect()</code> which brings all the elements in the RDD back to the driver program. Note that <code>collect()</code> should only be used when the data is small. Both <code>take</code> and <code>collect</code> are <strong>actions</strong>.</p>
+<pre><code class="language-scala">scala&gt; lines.take(5)
+res2: Array[String] = Array(00013D2EFD8E45D1,DIAG78820,1166,1.0, 00013D2EFD8E45D1,DIAGV4501,1166,1.0, 00013D2EFD8E45D1,heartfailure,1166,1.0, 00013D2EFD8E45D1,DIAG2720,1166,1.0, 00013D2EFD8E45D1,DIAG4019,1166,1.0)  
+</code></pre>
+<p>We got the first 5 records in this RDD. However, this is hard to read due to a poor format. We can make it more readable by traversing the array to print each record on its own line. </p>
+<pre><code class="language-scala">scala&gt; lines.take(5).foreach(println)
+00013D2EFD8E45D1,DIAG78820,1166,1.0
+00013D2EFD8E45D1,DIAGV4501,1166,1.0
+00013D2EFD8E45D1,heartfailure,1166,1.0
+00013D2EFD8E45D1,DIAG2720,1166,1.0
+00013D2EFD8E45D1,DIAG4019,1166,1.0
+</code></pre>
+<p>Note that in above 3 code block examples, the RDD <code>lines</code> has been computed (i.e. read in from file) 3 times. We can prevent this by calling <code>lines.cache()</code>, which will cache the RDD in memory to avoid reloading.</p>
+<p><strong>Exercise:</strong> How to print the first 5 event-id?</p>
+<p>Answer:</p>
+<pre><code class="language-scala">scala&gt; lines.take(5).map(_.split(&quot;,&quot;)).map(_(1)).foreach(println)
+</code></pre>
+<h3 id="function-map"><kbd>function</kbd> <code>map</code></h3>
+<p>The <code>map</code> operation in Spark is similar to that of Hadoop.
+It's a <strong>transformation</strong> that transforms each item in the RDD into a new item by applying the provided function.
+Notice this <code>map</code> will map exactly one element from source to target.
+For example, suppose we are only interested in knowing IDs of patients, we use <code>map</code> like</p>
+<pre><code class="language-scala">scala&gt; lines.map(line =&gt; line.split(&quot;,&quot;)(0))
+</code></pre>
+<p>It is also possible to write a more complex, multiple-lines map function. In this case, curly braces should be used in place of parentheses. For example, we can get both <code>patient-id</code> and <code>event-id</code> as a tuple at the same time. </p>
+<pre><code class="language-scala">scala&gt; lines.map{line =&gt;
+  val s = line.split(&quot;,&quot;)
+  (s(0), s(1))
+}
+</code></pre>
+<h3 id="function-filter"><kbd>function</kbd> <code>filter</code></h3>
+<p>As indicated by its name, <code>filter</code> can <strong>transform</strong> an RDD to another RDD by keeping only elements that satisfy the filtering condition.
+For example, we want to count the number of events collected for a particular patient to verify amount of the data from that patient.
+We can use a <code>filter</code> function:</p>
+<pre><code class="language-scala">scala&gt; lines.filter(line =&gt; line.contains(&quot;00013D2EFD8E45D1&quot;)).count()
+res4: Long = 200
+</code></pre>
+<h3 id="function-distinct"><kbd>function</kbd> <code>distinct</code></h3>
+<p><code>distinct</code> is a transformation that transforms a RDD to another by eliminating duplications.
+We can use that to count the number of distinct patients.
+In order to do this, we first extract the patient ID from each line.
+We use the <code>map()</code> function as described above.
+In this example, we transform each line into the corresponding patient ID by extracting only the first column.
+We then eliminate duplicate IDs by the <code>distinct()</code> function.</p>
+<pre><code class="language-scala">scala&gt; lines.map(line =&gt; line.split(&quot;,&quot;)(0)).distinct().count()
+res5: Long = 100
+</code></pre>
+<h3 id="function-group"><kbd>function</kbd> <code>group</code></h3>
+<p>Sometimes, you will need to group the input events according to <code>patient-id</code> to put everything about each patient together.
+For example, in order to extract index date for predictive modeling, you may first group input data by patient then handle each patient separately in parallel.
+We can see each element in RDD is a (Key, Value) pair <code>(patient-id, iterable[event])</code>.</p>
+<pre><code class="language-scala">&gt; val patientIdEventPair = lines.map{line =&gt;
+  val patientId = line.split(&quot;,&quot;)(0)
+  (patientId, line)
+}
+&gt; val groupedPatientData = patientIdEventPair.groupByKey
+&gt; groupedPatientData.take(1)
+res1: Array[(String, Iterable[String])] = Array((0102353632C5E0D0,CompactBuffer(0102353632C5E0D0,DIAG29181,562,1.0, 0102353632C5E0D0,DIAG29212,562,1.0, 0102353632C5E0D0,DIAG34590,562,1.0, 0102353632C5E0D0,DIAG30000,562,1.0, 0102353632C5E0D0,DIAG2920,562,1.0, 0102353632C5E0D0,DIAG412,562,1.0, 0102353632C5E0D0,DIAG28800,562,1.0, 0102353632C5E0D0,DIAG30391,562,1.0, 0102353632C5E0D0,DIAGRG894,562,1.0, 0102353632C5E0D0,PAYMENT,562,6000.0, 0102353632C5E0D0,DIAG5781,570,1.0, 0102353632C5E0D0,DIAG53010,570,1.0, 0102353632C5E0D0,DIAGE8490,570,1.0, 0102353632C5E0D0,DIAG27651,570,1.0, 0102353632C5E0D0,DIAG78559,570,1.0, 0102353632C5E0D0,DIAG56210,570,1.0, 0102353632C5E0D0,DIAG5856,570,1.0, 0102353632C5E0D0,heartfailure,570,1.0, 0102353632C5E0D0,DIAG5070,570,1.0, 0102353632C5E0D0,DIAGRG346,570,1.0,...
+....
+</code></pre>
+<h3 id="function-reducebykey"><kbd>function</kbd> <code>reduceByKey</code></h3>
+<p><code>reduceByKey</code> <em>transforms</em> an <code>RDD[(K, V)]</code> into <code>RDD[(K, List[V])]</code> (like what groupByKey does) and then apply <code>reduce</code> function on <code>List[V]</code> to get final output <code>RDD[(K, V)]</code>.
+Please be careful that we intentionally denote <code>V</code> as return type of <code>reduce</code> which should be same as input type of the list element.
+Suppose now we want to calculate the total payment by each patient.
+A payment record in the dataset is in the form of <code>(patient-id, PAYMENT, timestamp, value)</code>.</p>
+<pre><code class="language-scala">val payment_events = lines.filter(line =&gt; line.contains(&quot;PAYMENT&quot;))
+val payments = payment_events.map{ x =&gt;
+                                   val s = x.split(&quot;,&quot;)
+                                   (s(0), s(3).toFloat)
+                                 }
+val paymentPerPatient = payments.reduceByKey(_+_)
+</code></pre>
+<p>The <code>payment_events</code> RDD returned by <code>filter</code> contains those records associated with payment.
+Each item is then transformed to a key-value pair <code>(patient-id, payment)</code> with <code>map</code>.
+Because each patient can have multiple payments, we need to use <code>reduceByKey</code> to sum up the payments for each patient.
+Here in this example, <code>patient-id</code> will be served as the key, and <code>payment</code> will be the value to sum up for each patient.
+The figure below shows the process of <code>reduceByKey</code> in our example:</p>
+<p><img alt="reducebykey-payment" src="../img/spark/reducebykey-payment.jpg" /></p>
+<h3 id="function-sortby"><kbd>function</kbd> <code>sortBy</code></h3>
+<p>We can then find the top-3 patients with the highest payment by using <code>sortBy</code> first. </p>
+<pre><code class="language-scala">scala&gt; paymentPerPatient.sortBy(_._2, false).take(3).foreach(println)
+</code></pre>
+<p>and output is</p>
+<pre><code>(0085B4F55FFA358D,139880.0)
+(019E4729585EF3DD,108980.0)
+(01AC552BE839AB2B,108530.0)
+</code></pre>
+<p>Again in <code>sortBy</code> we use the <code>_</code> placeholder, so that <code>_._2</code> is an anonymous function that returns the second element of a tuple, which is the total payment a patient.
+The second parameter of <code>sortBy</code> controls the order of sorting.
+In the example above, <code>false</code> means decreasing order.</p>
+<p><strong>Exercise</strong>: How to calculate the maximum payment of each patient?</p>
+<p>Answer:</p>
+<pre><code class="language-scala">scala&gt; val maxPaymentPerPatient = payments.reduceByKey(math.max)
+</code></pre>
+<p>Here, <code>reduceByKey(math.max)</code> is the simplified expression of <code>reduceByKey(math.max(_,_))</code> or <code>reduceByKey((a,b) =&gt; math.max(a,b))</code>. <code>math.max</code> is a function in scala that turns the larger one of two parameters.</p>
+<p><strong>Exercise</strong>: how to count the number of records for each drug (event-id starts with "DRUG")</p>
+<p>Answer:</p>
+<pre><code class="language-scala">scala&gt; val drugFrequency = lines.filter(_.contains(&quot;DRUG&quot;)).
+                                 map{ x =&gt;
+                                   val s = x.split(&quot;,&quot;)
+                                   (s(1), 1)
+                                 }.reduceByKey(_+_)
+</code></pre>
+<h3 id="statistics">Statistics</h3>
+<p>Now we have the total payment information of patients, we can run some basic statistics.
+For RDD consists of numeric values, Spark provides some useful statistical primitives.</p>
+<pre><code class="language-scala">scala&gt; val payment_values = paymentPerPatient.map(payment =&gt; payment._2).cache()
+scala&gt; payment_values.max()
+res6: Float = 139880.0
+
+scala&gt; payment_values.min()
+res7: Float = 3910.0
+
+scala&gt; payment_values.sum()
+res8: Double = 2842480.0
+
+scala&gt; payment_values.mean()
+res9: Double = 28424.8
+
+scala&gt; payment_values.stdev()
+res10: Double = 26337.091771112468
+</code></pre>
+<h3 id="set-operations">Set Operations</h3>
+<p>RDDs support many of the set operations, such as <code>union</code> and <code>intersection</code>, even when the RDDs themselves are not properly sets.
+For example, we can combine the two files by the <code>union</code> function.
+Please notice that <code>union</code> here is not strictly identical to union operation in mathematics as Spark will not remove duplications.</p>
+<pre><code class="language-scala">scala&gt; val linesControl = sc.textFile(&quot;/input/control.csv&quot;)
+scala&gt; lines.union(linesControl).count()
+res11: Long = 31144
+
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Here, a more straightforward way is to use directory name to read in multiple files of that directory into a single RDD. </p>
+</div>
+<pre><code class="language-scala">scala&gt; val lines = sc.textFile(&quot;/input/&quot;)
+</code></pre>
+<p><strong>Exercise</strong>: how to count the number of drugs that appear in both case.csv and control.csv?</p>
+<p>Answer:</p>
+<pre><code class="language-scala">scala&gt; val drugCase = sc.textFile(&quot;/input/case.csv&quot;).
+                     filter(_.contains(&quot;DRUG&quot;)).
+                     map(_.split(&quot;,&quot;)(1)).
+                     distinct()
+scala&gt; val drugControl = sc.textFile(&quot;/input/control.csv&quot;).
+                     filter(_.contains(&quot;DRUG&quot;)).  
+                     map(_.split(&quot;,&quot;)(1)).
+                     distinct()
+scala&gt; drugCase.intersection(drugControl).count()
+res: Long = 396
+</code></pre>
+<h3 id="datasets">Datasets</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Dataset is added from <strong><a href="https://spark.apache.org/docs/1.6.0/sql-programming-guide.html#datasets">Spark 1.6+</a></strong></p>
+</div>
+<p>A Dataset is a new interface added from <strong>Spark 1.6</strong> that tries to provide the benefits of RDDs (strong typing, ability to use powerful lambda functions) with the benefits of Spark SQL’s optimized execution engine.</p>
+<p>A Dataset has a concrete type of a Scala primitive type (Integer, Long, Boolean, etc) or a subclass of a Product - a case class.
+The case class is preferred for Spark because it handles the serialization code for you thus allowing Spark to shuffle data between workers.
+This can additional be handled implementing Externalizable which is a much more efficient mechanism to handle serialization, or by using a compact serializer like Kryos.</p>
+<p>Additionally, Spark no longer uses SparkContext directly but prefers the use of a SparkSession that encapsulates a SparkContext and a SqlContext.  The SparkSession is a member of the <code>sql</code> package.</p>
+<p>There is a wealth of great documentation on the Spark development site.</p>
+<p><strong>Creating datasets</strong></p>
+<p>Datasets can be created explicitly or loaded form a source (e.g. file, stream, parquet, etc).  </p>
+<pre><code class="language-scala">case class Person(firstName: String, lastName:String)
+
+// wire-in spark implicits
+import spark.implicits._
+
+case class Person(firstName: String, lastName: String)
+
+val ds = Seq(Person(&quot;Daniel&quot;, &quot;Williams&quot;)).toDS()
+
+// here you can perform operations that are deferred until an action is invoked.
+// creates a anonymous lambda that looks at the 
+// firstName of the Dataset[Person] type and invokes a collect
+// to pull data back to the driver as an Array[Person]
+// the foreach then will invoke a println on each Person
+// instance and implicit apply the toString operation that is 
+// held in the Product trait
+ds.filter(_.firstName == &quot;Daniel&quot;).collect().foreach(println)
+
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="https://spark.apache.org/docs/latest/sql-programming-guide.html#creating-datasets">Spark SQL, DataFrames and Datasets Guide</a> for more information.</p>
+</div>
+<h2 id="4-further-reading">4. Further Reading</h2>
+<p>For the complete list of RDD operations, please see the <a href="https://spark.apache.org/docs/latest/programming-guide.html#rdd-operations">Spark Programming Guide</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../004-scala/" class="btn btn-neutral float-left" title="Scala Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../004-scala/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

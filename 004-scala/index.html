@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Scala Basics - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Scala Basics";
+        var mkdocs_page_input_path = "004-scala.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-python/">Python for Data Analysis</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../003-zeppelin/">Zeppelin</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Scala Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-scala-shell">1. Scala shell</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-variables">2. Variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-val-and-var">2.1. val and var</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#211-val">2.1.1. val</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#212-var">2.1.2. var</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-type">2.2. Type</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-functions">3. Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-code-blocks">3.1. Code Blocks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-class">4. Class</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41-object">4.1. Object</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-pattern-matching">5. Pattern Matching</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-case-study-of-some-common-types">6. Case Study of some Common Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61-option-some-none">6.1. Option, Some, None</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62-common-methods-in-list-array-set-and-so-on">6.2. Common methods in List, Array, Set, and so on</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#function-tolist-toarray-toset">function toList, toArray, toSet</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-par">function par</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-distinct">function distinct</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-foreach">function foreach</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-map">function map</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-flatten">function flatten</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-flatmap">function flatMap</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-collect">function collect</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-filter">function filter</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-filternot">function filterNot</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-forall">function forall</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-exists">function exists</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-find">function find</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-sortwith">function sortWith</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-zipwithindex">function zipWithIndex</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#keyword-for">keyword for</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#keyword-while">keyword while</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#keyword-to-until">keyword to, until</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-headoption">function headOption</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-head">function head</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-take">function take</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-drop">function drop</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-dropright">function dropRight</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-slice">function slice</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-splitat">function splitAt</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-groupby">function groupBy</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-partition">function partition</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-grouped">function grouped</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-standalone-program">7. Standalone Program</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-further-reading">8. Further Reading</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../005-spark/">Spark Basics</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Scala and Spark</li>
+      <li class="breadcrumb-item active">Scala Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="scala-basics">Scala Basics</h1>
+<p>In this section we will briefly go through the essential knowledge about Scala.
+You will first learn how to work with Scala shell, then learn how to use variables, functions with examples.
+Finally, we give instructions about how to compile and run a standalone program using <code>sbt</code>.</p>
+<h2 id="1-scala-shell">1. Scala shell</h2>
+<p>You can open a Scala shell by typing <code>scala</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Or, you can use <a href="http://www.scala-sbt.org/index.html">sbt</a> by typing <code>sbt console</code>.
+The second approach will help you add your project source code and dependencies into class path, so that your functions or library functions will be available for you to try in the interactive shell.
+The third approach is creating a new note in the Zeppelin notebook and choosing the default <code>spark</code> as the interpreter.</p>
+<p>In this tutorial, we will use the interactive shell or Zeppelin for simplicity.</p>
+</div>
+<p>Once starting the Scala shell you will see</p>
+<pre><code class="language-scala">$ scala
+Welcome to Scala version 2.10.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0).
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala&gt;
+</code></pre>
+<p>You can type <code>:quit</code> to stop and quit the shell, but don't do that now :-)
+Next you will learn some Scala operations in the shell with the following materials.</p>
+<h2 id="2-variables">2. Variables</h2>
+<h3 id="21-val-and-var">2.1. <code>val</code> and <code>var</code></h3>
+<p>In Scala, there are two types of variable, immutable <code>val</code> and mutable <code>var</code>.
+Unlike some functional programming language that requires immutable variables, Scala allows existence of mutable variables but immutable is recommended as it is easier to verify the correctness of your program.</p>
+<h4 id="211-val">2.1.1. <code>val</code></h4>
+<p>Define an immutable variable as</p>
+<pre><code class="language-scala">scala&gt; val myInt = 1 + 1
+myInt: Int = 2
+
+scala&gt; myInt = 3
+</code></pre>
+<p>where <code>val</code> is a keyword in <code>scala</code> that makes the variables immutable.
+If you reassign a value to <code>myInt</code>, error will be reported.</p>
+<pre><code class="language-scala">scala&gt; myInt = 3
+&lt;console&gt;:8: error: reassignment to val
+       myInt = 3
+             ^
+scala&gt;
+</code></pre>
+<p>The synopsis of a varialbe is:</p>
+<pre><code class="language-scala">scala&gt; val i:String = &quot;abc&quot;
+i: String = abc
+</code></pre>
+<ul>
+<li><code>val</code> means it it is immutable variable, you can use "var" to define a mutable variable</li>
+<li><code>i</code> is the name of this variable</li>
+<li><code>String</code> is the type of this string, it can be omitted here</li>
+<li><code>"abc"</code> is the value of this variable</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In the interactive shell, it's possible to redefine variable with same name.
+In Scala source code files, it's not allowed.</p>
+</div>
+<pre><code class="language-scala">scala&gt; val a = 1
+a: Int = 1
+
+scala&gt; val a = 2
+a: Int = 2
+</code></pre>
+<h4 id="212-var">2.1.2. <code>var</code></h4>
+<p>Instead, variables declared with <code>var</code> are mutable.
+Ideally, we try to use <code>val</code> instead of <code>var</code> if possible as a good practice of functional programming. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You may have concern that maybe too many immutable variables will be declared. Actually, with chained function calls, that situation is not the case for well organized code.</p>
+</div>
+<p>An example of mutable variable is</p>
+<pre><code class="language-scala">scala&gt; var myString = &quot;Hello Big Data&quot;
+myString: String = Hello Big Data
+
+scala&gt; myString = &quot;Hello Healthcare&quot;
+myString: String = Hello Healthcare
+</code></pre>
+<h3 id="22-type">2.2. Type</h3>
+<p>Scala may seem like a script language like JavaScript or Python, as variable type is not specified explicitly.
+In fact, Scala is a static type language and the compiler can implicitly infer the type in most cases.
+However, you can always specify a type as</p>
+<pre><code class="language-scala">scala&gt; val myDouble: Double = 3
+myDouble: Double = 3.0
+</code></pre>
+<p>It is always encouraged to specify the type so unless the type is too obvious.</p>
+<p>Besides simple built-in variable types like <code>Int</code>, <code>Double</code> and <code>String</code>, you will also learn about <code>List</code> and <code>Tuple</code> in the training: </p>
+<pre><code class="language-scala">scala&gt; val myList: List[String] = List(&quot;this&quot;, &quot;is&quot;, &quot;a&quot;, &quot;list&quot;, &quot;of&quot;, &quot;string&quot;)
+myList: List[String] = List(this, is, a, list, of, string)
+
+scala&gt; val myTuple: (Double, Double) = (1.0, 2.0)
+myTuple: (Double, Double) = (1.0,2.0)
+</code></pre>
+<p>Here the <code>List[String]</code> is syntax of generics in Scala, which is same as <code>C#</code>. In the above example, <code>List[String]</code> means a <code>List</code> of <code>String</code>.
+Similarly, <code>(Double, Double)</code> means a two-field tuple type and both the 1st element and the 2nd element should be of type <code>Double</code>.</p>
+<h2 id="3-functions">3. Functions</h2>
+<p>You can define a function and invoke the function like</p>
+<pre><code class="language-scala">scala&gt; def foo(v0:Int, v1:Int):Int = {
+     |     println(v0 max v1)
+     |     v0 + v1
+     | }
+foo: (v0: Int, v1: Int)Int
+
+scala&gt; foo(1, 2)
+2
+res0: Int = 3
+</code></pre>
+<p>Another example is</p>
+<pre><code class="language-scala">scala&gt; def triple(x: Int): Int = {
+          x*3
+       }
+triple: (x: Int)Int
+
+scala&gt; triple(2)
+res0: Int = 6
+</code></pre>
+<p>Where <code>x:</code>Int<code>is a parameter and its type, and the second Int</code> is <code>the</code>function<code>` return type</code>.
+There's no explicit <code>return</code> statement, but the result of the last expression (<code>v0 + v1</code> and <code>x * 3</code>) will be returned (similar to some other programming languages like <code>Ruby</code>).
+In this example, as there is only one expression and the return type can be inferred by the compiler, you may define the function as</p>
+<pre><code class="language-scala">def triple(x: Int) = x*3
+</code></pre>
+<p>Scala is object-oriented (OO), function calls on a class method are straightforward like most OO languages (e.g. Python, Java, C#)</p>
+<pre><code class="language-scala">scala&gt; myString = &quot;Hello Healthcare&quot;
+myString: String = Hello Healthcare
+scala&gt; myString.lastIndexOf(&quot;Healthcare&quot;)
+res1: Int = 6
+</code></pre>
+<p>If the function does not have parameters, you can even call it without parenthesis</p>
+<pre><code class="language-scala">scala&gt; val myInt = 2
+scala&gt; myInt.toString
+res2: String = 2
+</code></pre>
+<p>You can also define an anonymous function and pass it to a variable like a lambda expression in some other languages such as Python:</p>
+<pre><code class="language-scala">scala&gt; val increaseOne = (x: Int) =&gt; x + 1
+increaseOne: Int =&gt; Int = &lt;function1&gt;
+
+scala&gt; increaseOne(3)
+res3: Int = 4
+</code></pre>
+<p>Anonymous function is very useful as it can be passed as a parameter to a function call</p>
+<pre><code class="language-scala">scala&gt; myList.foreach{item: String =&gt; println(item)}
+this
+is
+a
+list
+of
+string
+</code></pre>
+<p>where <code>item: String =&gt; println(item)</code> is an anonymous function.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="https://stackoverflow.com/questions/24553578/why-use-curly-braces-over-parentheses">this page</a> and <a href="https://stackoverflow.com/questions/4386127/what-is-the-formal-difference-in-scala-between-braces-and-parentheses-and-when">this page</a> for more information about curly braces and parentheses.</p>
+</div>
+<p>This function call can be further simplified to</p>
+<pre><code class="language-scala">scala&gt; myList.foreach(println(_))
+scala&gt; myList.foreach(println)
+</code></pre>
+<p>where <code>_</code> represents the first parameter of the anonymous function with body <code>println(_)</code>.
+Additional <code>_</code> can be specified to represent more than one parameter.
+For example, we can calculate the total payment that a patient made by</p>
+<pre><code class="language-scala">scala&gt; val payments = List(1, 2, 3, 4, 5, 6)
+payments: List[Int] = List(1, 2, 3, 4, 5, 6)
+
+scala&gt; payments.reduce(_ + _)
+res0: Int = 21
+</code></pre>
+<p>In the above example, <code>reduce</code> will aggregate <code>List[V]</code> into <code>V</code> and we defined the aggregator as <code>_ + _</code> to sum them up.
+Of course, you can write that more explicitly like</p>
+<pre><code class="language-scala">scala&gt; payments.reduce((a, b) =&gt; a+b)
+res1: Int = 21
+</code></pre>
+<p>Here <code>reduce</code> is a construct from functional programming.
+It can be illustrated with the figure below where a function <em>f</em> is applied to one element at a time and the result together with next element will be parameters of the next function call until the end of the list.</p>
+<p><img alt="functional-reduce" src="../img/spark/scala-reduce.png" title="Reduce Recursive" /></p>
+<p>It's important to remember that for <code>reduce</code> operation, the input is <code>List[V]</code> and the output is <code>V</code>.
+You can learn more about such operations from <a href="https://en.wikipedia.org/wiki/Fold_(higher-order_function)">Wikipedia</a>.
+In contrast to <code>reduce</code>, you can of course write code using <code>for</code> loop, which is verbose and very rare in Scala,</p>
+<pre><code class="language-scala">scala&gt; var totalPayment = 0
+totalPayment: Int = 0
+
+scala&gt; for (payment &lt;- payments) {
+         totalPayment += payment
+       }
+
+scala&gt; totalPayment
+res2: Int = 21
+</code></pre>
+<h3 id="31-code-blocks">3.1. Code Blocks</h3>
+<p>We can create a code block anywhere, and the last line is the result of this block.
+For example,</p>
+<pre><code class="language-scala">def foo(i:Int) = {
+     println(s&quot;value: $i&quot;)
+     i * 2
+}
+
+val newList = List[Int](1, 2, 3).map(i =&gt; foo(i))
+</code></pre>
+<p>We can use the follow lines instead:</p>
+<pre><code class="language-scala">val newList = List[Int](1, 2, 3).map(i =&gt; {
+    println(s&quot;value: $i&quot;)
+    i * 2
+})
+</code></pre>
+<p>A better practice here is:</p>
+<pre><code class="language-scala">val newList = List[Int](1, 2, 3).map{i =&gt;
+    println(s&quot;value: $i&quot;)
+    i * 2
+}
+</code></pre>
+<h2 id="4-class">4. Class</h2>
+<p>Declaration of a class in Scala is as simple as</p>
+<pre><code class="language-scala">scala&gt; class Foo(a:String, b:Int) {
+     |     def length = a.length
+     | }
+defined class Foo
+
+scala&gt; val foo:Foo = new Foo(&quot;Hello, World!&quot;, 3)
+foo: Foo = Foo@6438a396
+
+scala&gt; println(foo.length)
+13
+</code></pre>
+<p>Another example is</p>
+<pre><code class="language-scala">scala&gt; class Patient(val name: String, val id: Int)
+defined class Patient
+
+scala&gt; val patient = new Patient(&quot;Bob&quot;, 1)
+patient: Patient = Patient@755f5e80
+
+scala&gt; patient.name
+res13: String = Bob
+</code></pre>
+<p>Here we see the succinct syntax of Scala again.
+<code>class Patient(val name: String, val id: Int)</code> not only defines constructor of <code>Patient</code> but also defines two member variables (<code>name</code> and <code>id</code>).</p>
+<p>A special kind of class that we will use a lot is the <a href="http://www.scala-lang.org/old/node/107">Case Class</a>.
+For example, <code>Case Class</code> can be declared as</p>
+<pre><code class="language-scala">scala&gt; case class Foo(a:String, b:Int)
+defined class Foo
+
+scala&gt; val foo:Foo = Foo(a = &quot;Hello, World!&quot;, b = 3)
+foo: Foo = Foo(Hello, World!,3)
+
+scala&gt; println(foo.a)
+Hello, World!
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please refer to <a href="http://stackoverflow.com/questions/2312881/what-is-the-difference-between-scalas-case-class-and-class">this page</a> for the differences between <code>case class</code> and <code>class</code>.</p>
+</div>
+<h3 id="41-object">4.1. Object</h3>
+<p>Functions/variables in Object is similar to the static function and variable in Java.</p>
+<pre><code class="language-scala">scala&gt; object Foo {
+     |     def greeting() {
+     |         println(&quot;Greeting from Foo&quot;)
+     |     }
+     | }
+defined object Foo
+
+scala&gt; Foo.greeting()
+Greeting from Foo
+</code></pre>
+<p>What is ought to be highlighted is the usage of "apply".
+<code>SomeObject.apply(v:Int)</code> equals <code>SomeObject(v:Int)</code></p>
+<pre><code class="language-scala">scala&gt; case class Foo(a:String, b:Int)
+     | object Bar {
+     |     def apply(a:String): Foo =
+     |         Foo(a, a.length)
+     | }
+defined class Foo
+defined object Bar
+
+scala&gt; val foo = Bar(&quot;Hello, World!&quot;)
+foo: Foo = Foo(Hello, World!,13)
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You may get a warning if you execute the above code individually.</p>
+</div>
+<pre><code>warning: previously defined object Foo is not a companion to class Foo.
+Companions must be defined together; you may wish to use :paste mode for this.
+</code></pre>
+<p>If you are using a terminal, a better practice is</p>
+<pre><code class="language-scala">scala&gt; :paste
+// Entering paste mode (ctrl-D to finish)
+
+case class Foo(a:String, b:Int)
+object Bar {
+    def apply(a:String): Foo =
+        Foo(a, a.length)
+}
+
+// Exiting paste mode, now interpreting.
+
+defined class Foo
+defined object Bar
+
+scala&gt; val foo = Bar(&quot;Hello, World!&quot;)
+foo: Foo = Foo(Hello, World!,13)
+</code></pre>
+<h2 id="5-pattern-matching">5. Pattern Matching</h2>
+<p>You may know the <code>switch..case</code> in other languages.
+Scala provides a more flexible and powerful technique, <code>Pattern Matching</code>.
+The below example shows one can match by-value and by-type in one match.</p>
+<pre><code class="language-scala">val payment:Any = 21
+payment match {
+    case p: String =&gt; println(&quot;payment is a String&quot;)
+    case p: Int if p &gt; 30 =&gt; println(&quot;payment &gt; 30&quot;)
+    case p: Int if p == 0 =&gt; println(&quot;zero payment&quot;)
+    case _ =&gt; println(&quot;otherwise&quot;)
+}
+</code></pre>
+<p>It's very convenient to use case class in pattern matching</p>
+<pre><code class="language-scala">scala&gt; case class Patient(val name: String, val id: Int)
+
+scala&gt; val p = new Patient(&quot;Abc&quot;, 1)
+p: Patient = Patient(Abc,1)
+
+scala&gt; p match {case Patient(&quot;Abc&quot;, id) =&gt; println(s&quot;matching id is $id&quot;)}
+matching id is 1
+</code></pre>
+<p>Here we not only matched <code>p</code> as <code>Patient</code> type, but also matched the patient name and extracted one member field from the <code>Patient</code> class instance.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>How to add default case to above <code>match</code> example?</p>
+</div>
+<p><strong>Answer</strong>:</p>
+<pre><code class="language-scala">p match {
+    case Patient(&quot;Abc&quot;, id) =&gt; println(s&quot;matching id is $id&quot;)
+    case _ =&gt; println(&quot;not matched&quot;)
+}
+</code></pre>
+<h2 id="6-case-study-of-some-common-types">6. Case Study of some Common Types</h2>
+<h3 id="61-option-some-none">6.1. Option, Some, None</h3>
+<p>We can use <code>null</code> in Scala as a null pointer, but it is not recommended.
+We are supposed to use <code>Option[SomeType]</code> to indicate this variable is optional.
+We can assume every variable without <code>Option</code> is not a null pointer if we are not calling Java code.</p>
+<p>There are two methods to check whether an <code>Option</code> variable is <code>null</code> (undefined) or not.
+The first one is <code>Some</code>:</p>
+<pre><code class="language-scala">val oi = Option(1)
+val i = oi match {
+    case Some(ri) =&gt; ri
+    case None =&gt; -1
+}
+println(i)
+</code></pre>
+<p>Another set of examples are:</p>
+<pre><code class="language-scala">val myMap: Map[String, String] = Map(&quot;key1&quot; -&gt; &quot;value&quot;)
+val value1: Option[String] = myMap.get(&quot;key1&quot;)
+val value2: Option[String] = myMap.get(&quot;key2&quot;)
+
+val i = myMap.get(&quot;key1&quot;) match {
+    case Some(ri) =&gt; ri
+    case None =&gt; &quot;None&quot;
+}
+println(i)
+
+val i = myMap.get(&quot;key2&quot;) match {
+    case Some(ri) =&gt; ri
+    case None =&gt; &quot;None&quot;
+}
+println(i)
+</code></pre>
+<p>The second method is the function <code>isDefined</code> / <code>isEmpty</code>.</p>
+<pre><code class="language-scala">val oi = Option(1)
+if(oi.isDefined) {
+    println(s&quot;oi: ${oi.get}&quot;)
+} else {
+    println(&quot;oi is empty&quot;)
+}
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>Option(null)</code> returns <code>None</code>, but <code>Some(null)</code> is <code>Some(null)</code> which is not equals <code>None</code>.</p>
+</div>
+<p><code>match</code> is a useful reserved word, we can use it in various situations.
+The first is the "switch--case" scenario.</p>
+<pre><code class="language-scala">true match {
+    case true =&gt; println(&quot;true&quot;)
+    case false =&gt; println(&quot;false&quot;)
+}
+</code></pre>
+<p>The second usage is filtering by partial input values.
+This example only retrieves the value of <code>B.a.j</code>.
+<code>_</code> is used as a placeholder and should never be matched.</p>
+<h3 id="62-common-methods-in-list-array-set-and-so-on">6.2. Common methods in List, Array, Set, and so on</h3>
+<p>In Scala, we always transfer the List (Array, Set, Map, etc.) from one status to another.</p>
+<h4 id="function-tolist-toarray-toset"><kbd>function</kbd> <code>toList</code>, <code>toArray</code>, <code>toSet</code></h4>
+<ul>
+<li>convert each other.</li>
+</ul>
+<h4 id="function-par"><kbd>function</kbd> <code>par</code></h4>
+<ul>
+<li>Parallelize List, Array, and Map, the result of <code>Seq[Int]().par</code> is <code>ParSeq[Int]</code>, you will able to process each element in parallel when you are using foreach, map, etc., and unable to call <code>sort</code> before you are using <code>toList</code>.</li>
+</ul>
+<h4 id="function-distinct"><kbd>function</kbd> <code>distinct</code></h4>
+<ul>
+<li>Removes duplicate elements</li>
+</ul>
+<h4 id="function-foreach"><kbd>function</kbd> <code>foreach</code></h4>
+<ul>
+<li>Process each element and return nothing</li>
+</ul>
+<pre><code class="language-scala">List[Int](1,2,3).foreach{ i =&gt;
+    println(i)
+}
+</code></pre>
+<p>It prints 1, 2, 3 in order.</p>
+<pre><code class="language-scala">List[Int](1,2,3).par.foreach{ i =&gt;
+    println(i)
+}
+</code></pre>
+<p>Also prints 1, 2, 3, but the order is not guaranteed.</p>
+<h4 id="function-map"><kbd>function</kbd> <code>map</code></h4>
+<ul>
+<li>Process each element and construct a List using the return value</li>
+</ul>
+<pre><code class="language-scala">List[Int](1,2,3).map{ i =&gt; i + 1 }
+</code></pre>
+<p>It will return <code>List[Int](2,3,4)</code>.</p>
+<p>The result of <code>List[A]().map(some-oper-return-type-B)</code>  is <code>List[B]</code>, while the result of <code>Array[A]().map</code> map is <code>Array[B]</code>.</p>
+<h4 id="function-flatten"><kbd>function</kbd> <code>flatten</code></h4>
+<ul>
+<li>The flatten method takes a list of lists and flattens it out to a single list:</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List[List[Int]](List(1,2),List(3,4)).flatten
+res1: List[Int] = List(1, 2, 3, 4)
+
+scala&gt; List[Option[Integer]](Some(1),Some[Integer](null),Some(2),None,Some(3)).flatten
+res2: List[Integer] = List(1, null, 2, 3)
+</code></pre>
+<h4 id="function-flatmap"><kbd>function</kbd> <code>flatMap</code></h4>
+<ul>
+<li>The flatMap is similar to <code>map</code>, but it takes a function returning a list of elements as its right operand. It applies the function to each list element and returns the concatenation of all function results.
+The result equals to <code>map</code> + <code>flatten</code></li>
+</ul>
+<h4 id="function-collect"><kbd>function</kbd> <code>collect</code></h4>
+<ul>
+<li>The iterator that is obtained from applying the partial function to every element in it for which it is defined and collecting the results.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3.4,&quot;str&quot;) collect {
+     |   case i:Int =&gt; (i * 2).toString
+     |   case f:Double =&gt; f.toString
+     | }
+res0: List[String] = List(2, 4, 3.4)
+</code></pre>
+<p>The function matches elements in Int and Double, processes them, and returns the value, but ignores string elements.</p>
+<h4 id="function-filter"><kbd>function</kbd> <code>filter</code></h4>
+<ul>
+<li>Filter this list</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).filter(_ % 2 == 0)
+res1: List[Int] = List(2)
+</code></pre>
+<h4 id="function-filternot"><kbd>function</kbd> <code>filterNot</code></h4>
+<ul>
+<li>Similar to filter</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).filterNot(_ % 2 == 0)
+res2: List[Int] = List(1, 3)
+</code></pre>
+<h4 id="function-forall"><kbd>function</kbd> <code>forall</code></h4>
+<ul>
+<li>Return true if <strong>All</strong> elements are return true by the partial function.
+It will immediately return once one element returns false, and ignore the rest elements.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(2,1,0,-1).forall{ i =&gt;
+     |   val res = i &gt; 0
+     |   println(s&quot;$i &gt; 0? $res&quot;)
+     |   res
+     | }
+2 &gt; 0? true
+1 &gt; 0? true
+0 &gt; 0? false
+res0: Boolean = false
+</code></pre>
+<h4 id="function-exists"><kbd>function</kbd> <code>exists</code></h4>
+<ul>
+<li>Return true if there are at least <strong>One</strong> element returns true.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(2,1,0,-1).exists{ i =&gt;
+     |   val res = i &lt;= 0
+     |   println(s&quot;$i &lt;= 0? $res&quot;)
+     |   res
+     | }
+2 &lt;= 0? false
+1 &lt;= 0? false
+0 &lt;= 0? true
+res2: Boolean = true
+</code></pre>
+<h4 id="function-find"><kbd>function</kbd> <code>find</code></h4>
+<ul>
+<li>Return the first element returns true by the partial function.
+Return <code>None</code> if no elemet is found.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(2,1,0,-1).find{ i =&gt;
+     |   val res = i &lt;= 0
+     |   println(s&quot;$i &lt;= 0? $res&quot;)
+     |   res
+     | }
+2 &lt;= 0? false
+1 &lt;= 0? false
+0 &lt;= 0? true
+res3: Option[Int] = Some(0)
+</code></pre>
+<h4 id="function-sortwith"><kbd>function</kbd> <code>sortWith</code></h4>
+<ul>
+<li>sort the elements</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,3,2).sortWith((leftOne,rightOne) =&gt; leftOne &gt; rightOne)
+res5: List[Int] = List(3, 2, 1)
+</code></pre>
+<h4 id="function-zipwithindex"><kbd>function</kbd> <code>zipWithIndex</code></h4>
+<ul>
+<li>zip the elements with appended indices</li>
+</ul>
+<pre><code class="language-scala">List(&quot;a&quot;,&quot;b&quot;).zipWithIndex.foreach{ kv:(String,Int) =&gt; println(s&quot;k:${kv._1}, v:${kv._2}&quot;)}
+</code></pre>
+<p>It will rebuild a List with indices.</p>
+<pre><code>k:a, v:0
+k:b, v:1
+</code></pre>
+<h4 id="keyword-for"><kbd>keyword</kbd> <code>for</code></h4>
+<ul>
+<li>Scala's keyword <code>for</code> can be used in various situations.</li>
+</ul>
+<p>Basically,</p>
+<pre><code class="language-scala">for{
+  i &lt;- List(1,2,3)
+} yield (i,i+1)
+</code></pre>
+<p>It equals:</p>
+<pre><code class="language-scala">List(1,2,3).map(i =&gt; (i, i+1))
+</code></pre>
+<p>Besides,</p>
+<pre><code class="language-scala">for{
+  i &lt;- List(1,2,3)
+  j &lt;- List(4,5,6)
+} yield (i,j)
+</code></pre>
+<p>We will get the cartesian product of  <code>List(1,2,3)</code> and <code>List(4,5,6)</code>: <code>List((1,4), (1,5), (1,6), (2,4), (2,5), (2,6), (3,4), (3,5), (3,6))</code></p>
+<p>We can add a filter in the condition:</p>
+<pre><code class="language-scala">for{
+  i &lt;- List(1,2,3)
+  if i != 1
+  j &lt;- List(4,5,6)
+  if i * j % 2 == 1
+} yield (i,j)
+</code></pre>
+<p>the result is : <code>List((3,5))</code></p>
+<p>Another usage of for is as follows:</p>
+<p>Let's define variables as follows:</p>
+<pre><code>val a = Some(1)
+val b = Some(2)
+val c = Some(3)
+</code></pre>
+<p>We can execute like this:</p>
+<pre><code class="language-scala">for {
+    i &lt;- a
+    j &lt;- b
+    k &lt;- c
+    r &lt;- {
+        println(s&quot;i:$i, j:$j, k:$k&quot;)
+        Some(i * j * k)
+    }
+} yield r
+</code></pre>
+<p>The response is:</p>
+<pre><code class="language-scala">i:1, j:2, k:3
+res9: Option[Int] = Some(6)
+</code></pre>
+<p>Let's define b as None:</p>
+<pre><code class="language-scala">scala&gt; val b:Option[Int] = None
+b: Option[Int] = None
+
+scala&gt; for {
+     |   i &lt;- a
+     |   j &lt;- b
+     |   k &lt;- c
+     |   r &lt;- {
+     |           println(s&quot;i: $i, j:$j, k:$k&quot;)
+     |           Some(i * j * k)
+     |   }
+     | } yield r
+res14: Option[Int] = None
+</code></pre>
+<h4 id="keyword-while"><kbd>keyword</kbd> <code>while</code></h4>
+<ul>
+<li>Similar to while in java</li>
+</ul>
+<pre><code class="language-scala">var i = 0
+while ({
+    i = i + 1
+    i &lt; 1000
+}){
+    // body of while
+    println(s&quot;i: $i&quot;)
+}
+</code></pre>
+<h4 id="keyword-to-until"><kbd>keyword</kbd> <code>to</code>, <code>until</code></h4>
+<p>— (1 to 10) will generate a Seq, with the content of (1,2,3,4…10), (0 until 10) will generate a sequence from 0 to 9. With some test, (0 until 1000).map(xxx) appears to be slower than <code>var i=0; while( i &lt; 1000) { i += 1; sth. else}</code>, but if the body of map is pretty heavy, this cost can be ignored.</p>
+<h4 id="function-headoption"><kbd>function</kbd> <code>headOption</code></h4>
+<ul>
+<li>Get the head of one list, return None if this list is empty</li>
+</ul>
+<h4 id="function-head"><kbd>function</kbd> <code>head</code></h4>
+<ul>
+<li>Get the head of one list, throw an exception if this list is empty</li>
+</ul>
+<h4 id="function-take"><kbd>function</kbd> <code>take</code></h4>
+<ul>
+<li>Get first at most N elements. (from left to right)</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).take(2)
+res0: List[Int] = List(1, 2)
+
+scala&gt; List(1,2).take(3)
+res1: List[Int] = List(1, 2)
+
+</code></pre>
+<h4 id="function-drop"><kbd>function</kbd> <code>drop</code></h4>
+<ul>
+<li>Drop first at most N elements.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).drop(2)
+res2: List[Int] = List(3)
+
+scala&gt; List(1,2).drop(3)
+res3: List[Int] = List()
+</code></pre>
+<h4 id="function-dropright"><kbd>function</kbd> <code>dropRight</code></h4>
+<ul>
+<li>drop elements from right to left.</li>
+</ul>
+<h4 id="function-slice"><kbd>function</kbd> <code>slice</code></h4>
+<ul>
+<li>Return list in <code>[start-offset, end-offset)</code></li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).slice(1,2)
+res7: List[Int] = List(2)
+
+scala&gt; List(1,2,3).slice(2,2)
+res8: List[Int] = List()
+</code></pre>
+<pre><code class="language-scala">val offset = 1
+val size = 3
+List(1,2,3,4,5).slice(offset, size + offset)
+</code></pre>
+<p>If the end-offset is greater than the length of this list, it will not throw an exception.</p>
+<h4 id="function-splitat"><kbd>function</kbd> <code>splitAt</code></h4>
+<ul>
+<li>Split this list into two from offset i</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).splitAt(1)
+res10: (List[Int], List[Int]) = (List(1),List(2, 3))
+</code></pre>
+<h4 id="function-groupby"><kbd>function</kbd> <code>groupBy</code></h4>
+<ul>
+<li>Partitions a list into a map of collections according to a discriminator function</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).groupBy(i =&gt; if(i % 2 == 0) &quot;even&quot; else &quot;odd&quot; )
+res11: scala.collection.immutable.Map[String,List[Int]] = Map(odd -&gt; List(1, 3), even -&gt; List(2))
+</code></pre>
+<h4 id="function-partition"><kbd>function</kbd> <code>partition</code></h4>
+<ul>
+<li>Splits a list into a pair of collections; one with elements that satisfy the predicate, the other with elements that do not, giving the pair of collections (xs filter p, xs.filterNot p).</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3).partition(_ % 2 == 0)
+res12: (List[Int], List[Int]) = (List(2),List(1, 3))
+</code></pre>
+<h4 id="function-grouped"><kbd>function</kbd> <code>grouped</code></h4>
+<ul>
+<li>The grouped method chunks its elements into increments.</li>
+</ul>
+<pre><code class="language-scala">scala&gt; List(1,2,3,4,5).grouped(2)
+res13: Iterator[List[Int]] = Iterator(List(1, 2), List(3, 4), List(5))
+</code></pre>
+<p>You can visit <a href="https://docs.scala-lang.org/">this webpage</a> for more information.</p>
+<p>We also highly recommended to read the book <a href="https://www.amazon.com/dp/B004Z1FTXS">Programming in Scala</a> for more detail instruction.</p>
+<h2 id="7-standalone-program">7. Standalone Program</h2>
+<p>Working with large real-world applications, you usually need to compile and package your source code with some tools. Here we show how to compile and run a simple program with <a href="http://www.scala-sbt.org/index.html">sbt</a>. Run the sample code in 'hello-bigdata' folder</p>
+<pre><code class="language-bash">% cd /bigdata-bootcamp/sample/hello-bigdata
+% sbt run
+Attempting to fetch sbt
+######################################################################### 100.0%
+Launching sbt from sbt-launch-0.13.8.jar
+[info] .....
+[info] Done updating.
+[info] Compiling 1 Scala source to ./hello-bigdata/target/scala-2.10/classes...
+[info] Running Hello 
+Hello bigdata
+[success] Total time: 2 s, completed May 3, 2015 8:42:48 PM
+</code></pre>
+<p>The source code file <code>hello.scala</code> is compiled and invoked.</p>
+<h2 id="8-further-reading">8. Further Reading</h2>
+<p>This is a very brief overview of important features of the Scala language. We highly recommend readers to checkout  references below to get a better and more complete understanding of the Scala programming language.</p>
+<ul>
+<li><a href="https://twitter.github.io/scala_school/index.html">Twitter Scala School</a></li>
+<li><a href="http://docs.scala-lang.org/tutorials/?_ga=1.128323084.1826222080.1429310377">Official Scala Tutorial</a></li>
+<li><a href="http://www.scala-sbt.org/0.13/tutorial/index.html">SBT tutorial</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../003-zeppelin/" class="btn btn-neutral float-left" title="Zeppelin"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../005-spark/" class="btn btn-neutral float-right" title="Spark Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../003-zeppelin/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../005-spark/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

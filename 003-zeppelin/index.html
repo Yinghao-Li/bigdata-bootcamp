@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Zeppelin - Georgia Tech Big Data Analytics Bootcamp</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Zeppelin";
+        var mkdocs_page_input_path = "003-zeppelin.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Georgia Tech Big Data Analytics Bootcamp
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Python Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../001-python/">Python for Data Analysis</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Environment Setup</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../002-docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Zeppelin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-preparation">1. Preparation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-install-zeppelin-and-start-service">2. Install Zeppelin and start service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-installation">2.1. Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-starting-service">2.2. Starting service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-open-zeppelin-notebook-in-your-browser">3. Open Zeppelin Notebook in your browser</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-create-a-new-notebook">4. Create a new Notebook</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-basic-usage">5. Basic usage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51-text-note">5.1. Text note</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52-scala-code">5.2. Scala code</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53-possible-error">5.3. Possible Error</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-load-data-into-table">6. Load Data Into Table</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-visualization-of-data-via-sql-query-statement">7. Visualization of Data via SQL query statement</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71-input-form">7.1. Input Form</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72-select-form">7.2. Select Form</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-exportimport-notebook">8. Export/Import Notebook</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Scala and Spark</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../004-scala/">Scala Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../005-spark/">Spark Basics</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Georgia Tech Big Data Analytics Bootcamp</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Environment Setup</li>
+      <li class="breadcrumb-item active">Zeppelin</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="zeppelin">Zeppelin</h1>
+<h2 id="1-preparation">1. Preparation</h2>
+<p>Please prepare your docker environment and start your Zeppelin service.
+The instructions can be found in <a href="{{base_path}}/teaching/002-bigdata-bootcamp-docker">this section</a>.</p>
+<p>You can use shared folders between your local OS and the virtual environment on Docker.
+These folders can be used to access data from your local and to save data after you exit/destroy your virtual environment.
+Use <code>-v</code> option to make a shared folder from an existing local folder and a folder in a virtual environment:</p>
+<pre><code class="language-bash">-v &lt;local_folder:vm_folder&gt;
+</code></pre>
+<p>You should use the absolute path for <code>vm_folder</code>, but it does not need to exist.
+For example, if want to use <code>~/Data/</code> in my local OS as the shared folder connected with <code>/sample_data</code>/` in the VM, I can start a container as follows:</p>
+<pre><code class="language-bash">docker run -it --privileged=true \
+  --cap-add=SYS_ADMIN \
+  -m 8192m -h bootcamp1.docker \
+  --name bigbox -p 2222:22 -p 9530:9530 -p 8888:8888\
+  -v /path/to/Data/:/sample_data/ \
+  sunlab/bigbox:latest \
+  /bin/bash
+</code></pre>
+<h2 id="2-install-zeppelin-and-start-service">2. Install Zeppelin and start service</h2>
+<h3 id="21-installation">2.1. Installation</h3>
+<p>If you have not installed Zeppelin, you can install it with</p>
+<pre><code class="language-bash">/scripts/install-zeppelin.sh
+</code></pre>
+<p>You may encounter this error while installing Zeppelin:</p>
+<pre><code class="language-bash">ERROR: cannot verify sunlab.org's certificate, issued by ‘/C=US/O=Let's Encrypt/CN=R3’:
+  Issued certificate has expired.
+To connect to sunlab.org insecurely, use `--no-check-certificate'.
+</code></pre>
+<p>To resolve this issue, you may need to modify the <code>install-zeppelin.sh</code> script using</p>
+<pre><code class="language-bash">vi ./scripts/install-zeppelin.sh
+</code></pre>
+<p>This will enter the <code>vi</code> editor in the terminal.
+In the editor, navigate to line 25 starting with <code>wget ...</code>, hit <code>i</code> to switch to the insert mode, and add the argument <code>--no-check-certificate</code> at the end.
+The updated line will look like</p>
+<pre><code class="language-bash">wget http://sunlab.org/teaching/download/zeppelin-0.7.3-bin-netinst.tgz --no-check-certificate
+</code></pre>
+<p>Once you have finished doing so, hit <code>Esc</code> to exit the insert mode, type <code>:wq</code>, and hit <code>Enter</code> to exit <code>vi</code> editor.</p>
+<p>You will be able to install <code>zeppelin</code> with <code>./scripts/install-zeppelin.sh</code> now.</p>
+<h3 id="22-starting-service">2.2. Starting service</h3>
+<p>Then, you can start Zeppelin service with</p>
+<pre><code class="language-bash">/scripts/start-zeppelin.sh
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure you have already started other necessary services with <code>./scripts/start-services.sh</code> before installing Zeppelin.</p>
+</div>
+<p>In addition, we need to create an HDFS folder for the user <code>zeppelin</code> as:</p>
+<pre><code class="language-bash">sudo su - hdfs  # switch to user 'hdfs'
+hdfs dfs -mkdir -p /user/zeppelin  # create folder in hdfs
+hdfs dfs -chown zeppelin /user/zeppelin  # change the folder owner
+exit
+</code></pre>
+<p>You can check whether it has been created or not by using:</p>
+<pre><code class="language-bash">hdfs dfs -ls /user/
+</code></pre>
+<h2 id="3-open-zeppelin-notebook-in-your-browser">3. Open Zeppelin Notebook in your browser</h2>
+<p>Once you have started Zeppelin service and have created the HDFS folder for Zeppelin, you can access Zeppelin Notebook using your local web browser.</p>
+<p>Open your web browser, and type in the address:</p>
+<pre><code class="language-bash">&lt;host-ip&gt;:&lt;port-for-zeppelin&gt;
+</code></pre>
+<p>For example, the address is <code>192.168.99.100:9530</code> if the IP address assigned to your Docker container is <code>192.168.99.100</code>, and the port number assigned to Zeppelin service is <code>9530</code> as default in our Docker image.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can check your docker host IP address using <code>ifconfig</code> (Linux/macOS) or <code>ipconfig</code> (Windows).
+The IP address is located at <code>Ethernet adapter vEthernet-&gt;IPv4 Address</code>.</p>
+<p>In fact, the docker host IP address is automatically mapped to url <a href="http://host.docker.internal">http://host.docker.internal</a>.
+So, a simpler approach is directly using the url <a href="http://host.docker.internal:9530">http://host.docker.internal:9530</a> to access Zeppelin Notebook (<a href="https://docs.docker.com/desktop/windows/networking/">reference</a>).</p>
+</div>
+<p>Once you navigate to that IP address with the port number, you will see the front page of Zeppelin like
+<img alt="zeppelin-frontpage" src="../img/zeppelin/frontpage.png" /></p>
+<h2 id="4-create-a-new-notebook">4. Create a new Notebook</h2>
+<p>Click on 'Create new note', and give a name, click on 'Create Note':
+Then, you will see a new blank note:</p>
+<p><img alt="zeppelin-new" src="../img/zeppelin/create.gif" /></p>
+<p>Next, click the gear icon on the top-right, interpreter binding setting will be unfolded.
+Default interpreters will be enough for the most of cases, but you can add/remove them at 'interpreter' menu if you want to. Click on 'Save' once you complete your configuration.</p>
+<p><img alt="zeppelin-interpreters" src="../img/zeppelin/settings.gif" /></p>
+<h2 id="5-basic-usage">5. Basic usage</h2>
+<p>You can click the gear icon at the right side of the paragraph. If you click 'Show title' you can give a title as you want for each paragraph.
+Try to use other commands also.</p>
+<p><img alt="zeppelin-title" src="../img/zeppelin/menu.gif" /></p>
+<h3 id="51-text-note">5.1. Text note</h3>
+<p>Like other Notebooks, e.g., Jupyter, we can put some text in a paragraph by using <code>md</code> command with Markdown syntax:</p>
+<pre><code>%md
+&lt;some text using markdown syntax&gt;
+</code></pre>
+<p>Afterwards, click the <code>play</code> button or use key combination <code>Shift+Enter</code> to run the paragraph.
+It will show formatted Markdown text.
+You can also choose to show or hide editor for better visual effect.</p>
+<p><img alt="zeppelin-text" src="../img/zeppelin/text.gif" /></p>
+<h3 id="52-scala-code">5.2. Scala code</h3>
+<p>If you bind default interpreters, you can use scala codes as well as Spark API in a paragraph directly:</p>
+<p><img alt="zeppelin-scala" src="../img/zeppelin/scala.png" /></p>
+<p>Again, do not forget to actually run the paragraph.</p>
+<h3 id="53-possible-error">5.3. Possible Error</h3>
+<p>If you encounter an error related to HDFS, please check whether you have created an HDFS user folder for 'zeppelin' as described above.</p>
+<h2 id="6-load-data-into-table">6. Load Data Into Table</h2>
+<p>We can use SQL query statements for easier visualization with Zeppelin.
+Later, you can fully utilize Angular or D3 in Zeppelin for better or more sophisticated visualization.</p>
+<p>Let's get the "Bank" data from the official Zeppelin tutorial.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p>You can find the tutorial at <code>Zeppelin Tutorial/Basic Features (Spark)</code> on the Welcome page.</p>
+<p><img alt="zeppelin-data" src="../img/zeppelin/prepare.png" /></p>
+<p>Next, define a <code>case class</code> for easy transformation into <code>DataFrame</code> and map the text data we downloaded into DataFrame without its header. Finally, register this DataFrame as <code>Table</code> to use sql query statements.</p>
+<p><img alt="zeppelin-load" src="../img/zeppelin/table.png" /></p>
+<h2 id="7-visualization-of-data-via-sql-query-statement">7. Visualization of Data via SQL query statement</h2>
+<p>Once data is loaded into <code>Table</code>, you can use <code>SQL</code> query to visualize the data you want to see:</p>
+<pre><code class="language-sql">%sql
+&lt;valid SQL statement&gt;
+</code></pre>
+<p>Let's try to show a distribution of age of those who are younger than 30.</p>
+<p><img alt="zeppelin-sql" src="../img/zeppelin/sql.png" /></p>
+<p>As you can see, the visualization tool will be automatically loaded once you run a paragraph with an SQL statement.
+The default one is the result table of the query statement, but you can choose other types of visualization such as bar chart, pie chart, and line chart by just clicking the icons.</p>
+<p><img alt="zeppelin-charts" src="../img/zeppelin/zeppelin_basic.gif" />
+Also, you can change configurations for each chart as you want</p>
+<h3 id="71-input-form">7.1. Input Form</h3>
+<p>You can create an input form by using <code>${formName}</code> or <code>${formName=defaultValue}</code> templates.</p>
+<p><img alt="zeppelin-input-form" src="../img/zeppelin/input_form.gif" /></p>
+<h3 id="72-select-form">7.2. Select Form</h3>
+<p>Also, you can create a select form by using <code>${formName=defaultValue,option1|option2...}</code></p>
+<p><img alt="zeppelin-select-form" src="../img/zeppelin/select_form.gif" /></p>
+<p>For more dynamic forms, please refer to <a href="https://zeppelin.apache.org/docs/latest/manual/dynamicform.html">zeppelin-dynamicform</a></p>
+<h2 id="8-exportimport-notebook">8. Export/Import Notebook</h2>
+<p>Once you've finished your work, you can export Notebook as a JSON file for later use.</p>
+<p><img alt="zeppelin-select-form" src="../img/zeppelin/export.png" /></p>
+<p>Also, you can import Notebook exported as JSON or from URL.</p>
+<p><img alt="zeppelin-select-form" src="../img/zeppelin/import.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can download the JSON file for this tutorial <a href="https://gist.githubusercontent.com/yuikns/b7fc51a56e936e29f1577456c1b47563/raw/17d25875d7fd73eedaa67bc2f02e0a115110c233/tutorial.json">here</a> or see the official 'Zeppelin Tutorial' on the frontpage of Zeppelin.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../002-docker/" class="btn btn-neutral float-left" title="Docker"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../004-scala/" class="btn btn-neutral float-right" title="Scala Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../002-docker/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../004-scala/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
