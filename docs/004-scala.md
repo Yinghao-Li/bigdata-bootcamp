@@ -154,7 +154,7 @@ scala> triple(2)
 res0: Int = 6
 ```
 
-Where `x: `Int` is a parameter and its type, and the second Int` is `the `function`` return type`.
+Where `x: Int` is a parameter and its type, and the second `Int` is the function's return type.
 There's no explicit `return` statement, but the result of the last expression (`v0 + v1` and `x * 3`) will be returned (similar to some other programming languages like `Ruby`).
 In this example, as there is only one expression and the return type can be inferred by the compiler, you may define the function as
 
